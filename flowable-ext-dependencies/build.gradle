@@ -1,0 +1,12 @@
+apply plugin: 'io.spring.dependency-management'
+
+description = "flowable-ext-dependencies"
+
+ext['flowable-spring-boot-starter.version'] = '6.6.0'
+ext['mybatis-plus-boot-starter.version'] = '3.4.1'
+
+dependencyManagement {
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    }
+}

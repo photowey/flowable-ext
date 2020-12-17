@@ -1,0 +1,5 @@
+description = "flowable-ext-parent"
+
+dependencies {
+    compile project(":flowable-ext-dependencies")
+}

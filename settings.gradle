@@ -1,0 +1,31 @@
+pluginManagement {
+    plugins {
+        id "org.springframework.boot.bom" version "2.4.1"
+    }
+    resolutionStrategy {
+    }
+    repositories {
+        mavenLocal()
+        maven {
+            name "aliyun";
+            url "https://maven.aliyun.com/repository/public"
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'flowable-ext'
+
+include 'flowable-ext-auto-configurer'
+include 'flowable-ext-command'
+include 'flowable-ext-command-executor'
+include 'flowable-ext-core'
+include 'flowable-ext-dependencies'
+include 'flowable-ext-mybatis-api'
+include 'flowable-ext-mybatis-api-impl'
+include 'flowable-ext-parent'
+include 'flowable-ext-runtime'
+include 'flowable-ext-spi'
+include 'flowable-ext-test'
+
