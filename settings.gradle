@@ -27,5 +27,6 @@ include 'flowable-ext-mybatis-api-impl'
 include 'flowable-ext-parent'
 include 'flowable-ext-runtime'
 include 'flowable-ext-spi'
+include 'flowable-ext-starter'
 include 'flowable-ext-test'
 

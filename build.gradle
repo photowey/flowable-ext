@@ -11,6 +11,14 @@ plugins {
 subprojects {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'java'
+
+    dependencies {
+        implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
 }
 
 // ================================================================= GROUP
@@ -53,6 +61,10 @@ allprojects {
             }
             mavenCentral()
         }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
     }
 
     configurations.all {
