@@ -1,12 +1,30 @@
+apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 description = "flowable-ext-dependencies"
 
-ext['flowable-spring-boot-starter.version'] = '6.6.0'
-ext['mybatis-plus-boot-starter.version'] = '3.4.1'
+ext['SpringBootVersion'] = '2.4.1'
+ext['FlowableVersion'] = '6.6.0'
+ext['MybatisPlusVersion'] = '3.4.1'
+ext['Slf4jVersion'] = '1.7.30'
+ext['JupiterVersion'] = '5.7.0'
 
 dependencyManagement {
     imports {
         mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
     }
+    dependencies {
+        dependency "org.flowable:flowable-spring-boot-starter:${FlowableVersion}"
+        dependency "com.baomidou:mybatis-plus-boot-starter:${MybatisPlusVersion}"
+        dependency "org.slf4j:slf4j-api:${Slf4jVersion}"
+    }
 }
+
+dependencies {
+    // BOM
+    implementation platform("org.springframework.boot:spring-boot-dependencies:${SpringBootVersion}")
+
+    // Log
+    compile"org.slf4j:slf4j-api:${Slf4jVersion}"
+}
+

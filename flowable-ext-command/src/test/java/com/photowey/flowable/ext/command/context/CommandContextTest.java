@@ -2,8 +2,8 @@ package com.photowey.flowable.ext.command.context;
 
 import com.photowey.flowable.ext.command.factory.TestCommandContextFactory;
 import org.junit.jupiter.api.*;
-import org.junit.platform.commons.logging.Logger;
-import org.junit.platform.commons.logging.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ import java.util.Map;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CommandContextTest {
 
-    Logger log = LoggerFactory.getLogger(CommandContextTest.class);
+    private static final Logger log = LoggerFactory.getLogger(CommandContextTest.class);
 
     @Test
     @Order(1)
@@ -31,7 +31,7 @@ public class CommandContextTest {
         String world = commandContext.getAttribute(helloKey);
         Assertions.assertEquals("world", world, String.format("Get the attribute:[%s] error", helloKey));
 
-        log.info(() -> "test testSetAttribute() succeed...");
+        log.info("test testSetAttribute() succeed...");
     }
 
     @Test
@@ -47,7 +47,7 @@ public class CommandContextTest {
         String world = commandContext.getAttribute(helloKey);
         Assertions.assertEquals("world", world, String.format("Get the attribute:[%s] error", helloKey));
 
-        log.info(() -> "test testGetAttribute() succeed...");
+        log.info("test testGetAttribute() succeed...");
     }
 
     @Test
@@ -65,7 +65,7 @@ public class CommandContextTest {
         Assertions.assertEquals("world", attributes.get(helloKey), String.format("Get the attribute:[%s] error", helloKey));
         Assertions.assertEquals("Flowable-ext", attributes.get(testKey), String.format("Get the attribute:[%s] error", testKey));
 
-        log.info(() -> "test testGetAttributes() succeed...");
+        log.info("test testGetAttributes() succeed...");
     }
 
     @Test
@@ -78,6 +78,6 @@ public class CommandContextTest {
         String notExistWithSupplier = commandContext.getAttribute(notExistKey, () -> notExistValue);
 
         Assertions.assertEquals(notExistValue, notExistWithSupplier, String.format("Get the attribute with Supplier error"));
-        log.info(() -> "test testGetAttributeWithSupplier() succeed...");
+        log.info("test testGetAttributeWithSupplier() succeed...");
     }
 }

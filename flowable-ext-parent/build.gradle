@@ -1,5 +1,6 @@
 description = "flowable-ext-parent"
 
 dependencies {
+    // Inner module
     compile project(":flowable-ext-dependencies")
 }

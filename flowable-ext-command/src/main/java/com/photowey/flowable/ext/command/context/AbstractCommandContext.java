@@ -1,5 +1,7 @@
 package com.photowey.flowable.ext.command.context;
 
+import com.photowey.flowable.ext.command.feature.Feature;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
@@ -70,5 +72,18 @@ public abstract class AbstractCommandContext implements Attributes {
         this.attributes.put(key, expect);
 
         return expect;
+    }
+
+    /**
+     * The command Feature
+     */
+    public Feature feature;
+
+    public Feature getFeature() {
+        return feature;
+    }
+
+    public void setFeature(Feature feature) {
+        this.feature = feature;
     }
 }
