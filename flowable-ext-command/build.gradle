@@ -2,6 +2,7 @@ description = "flowable-ext-command"
 
 dependencies {
     compile project(":flowable-ext-parent")
+    compile project(":flowable-ext-core")
 
     // Test
     implementation "org.junit.jupiter:junit-jupiter:5.7.0"

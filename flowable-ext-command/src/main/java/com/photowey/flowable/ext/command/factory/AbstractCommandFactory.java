@@ -36,7 +36,7 @@ public abstract class AbstractCommandFactory<T extends AbstractCommandContext, F
      */
     protected void populateCommand(T context) {
         this.populateUser(context);
-        this.populateUser(context);
+        this.populateFeature(context);
     }
 
     /**
