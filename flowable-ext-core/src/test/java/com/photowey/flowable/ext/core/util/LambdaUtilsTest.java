@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * LambdaUtilsTest
@@ -20,7 +21,7 @@ public class LambdaUtilsTest {
     @Test
     public void testTransferList() {
         List<Hello> hellos = this.populateHellos();
-        List<Long> ids = LambdaUtils.transferList(hellos, Hello::getId);
+        List<Long> ids = LambdaUtils.transferToList(hellos, Hello::getId);
         Assertions.assertTrue(3 == ids.size(), "Error:LambdaUtils.transferList()");
         Assertions.assertTrue(1L == ids.get(0), "Error:LambdaUtils.transferList()");
         Assertions.assertTrue(2L == ids.get(1), "Error:LambdaUtils.transferList()");
@@ -30,7 +31,7 @@ public class LambdaUtilsTest {
     @Test
     public void testTransferSet() {
         List<Hello> hellos = this.populateHellos();
-        Set<String> names = LambdaUtils.transferSet(hellos, Hello::getName);
+        Set<String> names = LambdaUtils.transferToSet(hellos, Hello::getName);
         Assertions.assertTrue(2 == names.size(), "Error:LambdaUtils.transferSet()");
     }
 
@@ -79,6 +80,11 @@ public class LambdaUtilsTest {
         hellos.add(hello2);
         hellos.add(hello3);
         return hellos;
+    }
+
+    public List<Integer> copy(List<Integer> temps) {
+        List<Integer> collect = temps.stream().map(temp -> temp).collect(Collectors.toList());
+        return collect;
     }
 
 }

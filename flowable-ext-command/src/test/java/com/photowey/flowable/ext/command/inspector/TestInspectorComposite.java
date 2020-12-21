@@ -1,9 +1,13 @@
 package com.photowey.flowable.ext.command.inspector;
 
 import com.photowey.flowable.ext.command.context.TestCommandContext;
+import com.photowey.flowable.ext.command.order.Ordered;
+import com.photowey.flowable.ext.command.order.PriorityOrdered;
+import com.photowey.flowable.ext.core.util.LambdaUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * TestInspectorComposite
@@ -18,7 +22,40 @@ public class TestInspectorComposite implements Inspector<TestCommandContext> {
 
     @Override
     public boolean inspect(TestCommandContext context) {
-        for (Inspector<TestCommandContext> delegate : this.delegates) {
+        // Priority Ordered
+        List<Inspector<TestCommandContext>> priorityInspectors = LambdaUtils.filter(delegates,
+                delegate -> PriorityOrdered.class.isAssignableFrom(delegate.getClass()));
+        if (priorityInspectors.size() > 0) {
+            for (Inspector<TestCommandContext> delegate : priorityInspectors) {
+                if (!delegate.inspect(context)) {
+                    return false;
+                }
+            }
+        }
+
+        // Plain Ordered
+        List<Inspector<TestCommandContext>> plainOrderedInspectors = LambdaUtils.filter(delegates,
+                delegate -> Ordered.class.isAssignableFrom(delegate.getClass()));
+        // Remove: priority ordered
+        plainOrderedInspectors.removeAll(priorityInspectors);
+
+        if (plainOrderedInspectors.size() > 0) {
+            for (Inspector<TestCommandContext> delegate : plainOrderedInspectors) {
+                if (!delegate.inspect(context)) {
+                    return false;
+                }
+            }
+        }
+
+        List<Inspector<TestCommandContext>> normalInspectors = LambdaUtils.copy(this.delegates);
+        if (priorityInspectors.size() > 0) {
+            normalInspectors.removeAll(priorityInspectors);
+        }
+        if (plainOrderedInspectors.size() > 0) {
+            normalInspectors.removeAll(plainOrderedInspectors);
+        }
+
+        for (Inspector<TestCommandContext> delegate : normalInspectors) {
             if (!delegate.inspect(context)) {
                 return false;
             }
@@ -27,7 +64,13 @@ public class TestInspectorComposite implements Inspector<TestCommandContext> {
         return true;
     }
 
-    public void registerInspector(Inspector<TestCommandContext> candidate) {
-        this.delegates.add(candidate);
+    public void registerInspector(Inspector<TestCommandContext> delegate) {
+        this.delegates.add(delegate);
     }
+
+    public List<Inspector<TestCommandContext>> copy(List<Inspector<TestCommandContext>> delegates) {
+        List<Inspector<TestCommandContext>> copy = delegates.stream().map(temp -> temp).collect(Collectors.toList());
+        return copy;
+    }
+
 }
