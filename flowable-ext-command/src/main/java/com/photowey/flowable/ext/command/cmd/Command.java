@@ -1,6 +1,6 @@
 package com.photowey.flowable.ext.command.cmd;
 
-import com.photowey.flowable.ext.command.context.AbstractCommandContext;
+import com.photowey.flowable.ext.plugin.api.context.AbstractCommandContext;
 
 /**
  * {@code Command} is an interface that can be implemented by objects

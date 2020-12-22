@@ -1,9 +1,10 @@
 package com.photowey.flowable.ext.command.feature;
 
-import com.photowey.flowable.ext.command.context.TestCommandContext;
-import com.photowey.flowable.ext.command.inspector.Inspector;
-import com.photowey.flowable.ext.command.rule.Rule;
-import com.photowey.flowable.ext.command.storage.Storage;
+import com.photowey.flowable.ext.command.cmd.TestCommandContext;
+import com.photowey.flowable.ext.plugin.api.feature.Feature;
+import com.photowey.flowable.ext.plugin.api.inspector.Inspector;
+import com.photowey.flowable.ext.plugin.api.rule.Rule;
+import com.photowey.flowable.ext.plugin.api.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.List;

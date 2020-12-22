@@ -1,7 +1,7 @@
 package com.photowey.flowable.ext.command.factory;
 
-import com.photowey.flowable.ext.command.context.AbstractCommandContext;
-import com.photowey.flowable.ext.command.feature.Feature;
+import com.photowey.flowable.ext.plugin.api.context.AbstractCommandContext;
+import com.photowey.flowable.ext.plugin.api.feature.Feature;
 
 /**
  * {@code AbstractCommandFactory} in an abstract class, that can be implemented by objects,
@@ -31,8 +31,8 @@ public abstract class AbstractCommandFactory<T extends AbstractCommandContext, F
      * Populate the the command context {@code User} and {@link Feature}
      *
      * @param context The command context
-     * @see {@link AbstractCommandFactory#populateUser(com.photowey.flowable.ext.command.context.AbstractCommandContext)}
-     * @see {@link AbstractCommandFactory#populateFeature(com.photowey.flowable.ext.command.context.AbstractCommandContext)}
+     * @see {@link AbstractCommandFactory#populateUser(com.photowey.flowable.ext.plugin.api.context.AbstractCommandContext)}
+     * @see {@link AbstractCommandFactory#populateFeature(com.photowey.flowable.ext.plugin.api.context.AbstractCommandContext)}
      */
     protected void populateCommand(T context) {
         this.populateUser(context);

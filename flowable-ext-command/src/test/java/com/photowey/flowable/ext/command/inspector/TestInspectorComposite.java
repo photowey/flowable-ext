@@ -1,13 +1,13 @@
 package com.photowey.flowable.ext.command.inspector;
 
-import com.photowey.flowable.ext.command.context.TestCommandContext;
-import com.photowey.flowable.ext.command.order.Ordered;
-import com.photowey.flowable.ext.command.order.PriorityOrdered;
-import com.photowey.flowable.ext.core.util.LambdaUtils;
+import com.photowey.flowable.ext.command.cmd.TestCommandContext;
+import com.photowey.flowable.ext.common.util.LambdaUtils;
+import com.photowey.flowable.ext.plugin.api.inspector.Inspector;
+import com.photowey.flowable.ext.plugin.api.order.Ordered;
+import com.photowey.flowable.ext.plugin.api.order.PriorityOrdered;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * TestInspectorComposite
@@ -23,7 +23,7 @@ public class TestInspectorComposite implements Inspector<TestCommandContext> {
     @Override
     public boolean inspect(TestCommandContext context) {
         // Priority Ordered
-        List<Inspector<TestCommandContext>> priorityInspectors = LambdaUtils.filter(delegates,
+        List<Inspector<TestCommandContext>> priorityInspectors = LambdaUtils.filter(this.delegates,
                 delegate -> PriorityOrdered.class.isAssignableFrom(delegate.getClass()));
         if (priorityInspectors.size() > 0) {
             for (Inspector<TestCommandContext> delegate : priorityInspectors) {
@@ -34,7 +34,7 @@ public class TestInspectorComposite implements Inspector<TestCommandContext> {
         }
 
         // Plain Ordered
-        List<Inspector<TestCommandContext>> plainOrderedInspectors = LambdaUtils.filter(delegates,
+        List<Inspector<TestCommandContext>> plainOrderedInspectors = LambdaUtils.filter(this.delegates,
                 delegate -> Ordered.class.isAssignableFrom(delegate.getClass()));
         // Remove: priority ordered
         plainOrderedInspectors.removeAll(priorityInspectors);
@@ -67,10 +67,4 @@ public class TestInspectorComposite implements Inspector<TestCommandContext> {
     public void registerInspector(Inspector<TestCommandContext> delegate) {
         this.delegates.add(delegate);
     }
-
-    public List<Inspector<TestCommandContext>> copy(List<Inspector<TestCommandContext>> delegates) {
-        List<Inspector<TestCommandContext>> copy = delegates.stream().map(temp -> temp).collect(Collectors.toList());
-        return copy;
-    }
-
 }

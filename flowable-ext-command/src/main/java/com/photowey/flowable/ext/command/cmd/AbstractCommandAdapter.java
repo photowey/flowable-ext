@@ -1,7 +1,7 @@
 package com.photowey.flowable.ext.command.cmd;
 
-import com.photowey.flowable.ext.command.context.AbstractCommandContext;
-import com.photowey.flowable.ext.command.feature.Feature;
+import com.photowey.flowable.ext.plugin.api.context.AbstractCommandContext;
+import com.photowey.flowable.ext.plugin.api.feature.Feature;
 
 /**
  * {@code AbstractCommandAdapter} in an abstract class, that can be implemented by real command.

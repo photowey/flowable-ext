@@ -1,7 +1,7 @@
 package com.photowey.flowable.ext.command.factory;
 
 import com.photowey.flowable.ext.command.cmd.TestCommand;
-import com.photowey.flowable.ext.command.context.TestCommandContext;
+import com.photowey.flowable.ext.command.cmd.TestCommandContext;
 import com.photowey.flowable.ext.command.feature.TestFeature;
 import com.photowey.flowable.ext.command.feature.TestFeatureCandidate;
 import com.photowey.flowable.ext.command.feature.TestFeatureComposite;

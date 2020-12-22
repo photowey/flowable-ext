@@ -1,6 +1,7 @@
 package com.photowey.flowable.ext.command.inspector;
 
-import com.photowey.flowable.ext.command.context.TestCommandContext;
+import com.photowey.flowable.ext.command.cmd.TestCommandContext;
+import com.photowey.flowable.ext.plugin.api.inspector.Inspector;
 
 /**
  * TestInspector

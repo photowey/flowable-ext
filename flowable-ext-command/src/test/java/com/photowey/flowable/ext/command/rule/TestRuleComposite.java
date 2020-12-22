@@ -1,9 +1,10 @@
 package com.photowey.flowable.ext.command.rule;
 
-import com.photowey.flowable.ext.command.context.TestCommandContext;
-import com.photowey.flowable.ext.command.order.Ordered;
-import com.photowey.flowable.ext.command.order.PriorityOrdered;
-import com.photowey.flowable.ext.core.util.LambdaUtils;
+import com.photowey.flowable.ext.command.cmd.TestCommandContext;
+import com.photowey.flowable.ext.common.util.LambdaUtils;
+import com.photowey.flowable.ext.plugin.api.order.Ordered;
+import com.photowey.flowable.ext.plugin.api.order.PriorityOrdered;
+import com.photowey.flowable.ext.plugin.api.rule.Rule;
 
 import java.util.ArrayList;
 import java.util.List;

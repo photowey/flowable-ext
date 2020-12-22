@@ -1,7 +1,7 @@
 package com.photowey.flowable.ext.command.factory;
 
 import com.photowey.flowable.ext.command.cmd.Command;
-import com.photowey.flowable.ext.command.context.AbstractCommandContext;
+import com.photowey.flowable.ext.plugin.api.context.AbstractCommandContext;
 
 /**
  * {@code CommandFactory} is an interface that can be implemented by real command factory,

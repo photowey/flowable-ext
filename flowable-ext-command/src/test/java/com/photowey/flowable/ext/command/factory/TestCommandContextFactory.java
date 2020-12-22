@@ -1,6 +1,6 @@
 package com.photowey.flowable.ext.command.factory;
 
-import com.photowey.flowable.ext.command.context.TestCommandContext;
+import com.photowey.flowable.ext.command.cmd.TestCommandContext;
 
 /**
  * TestCommandContextFactory

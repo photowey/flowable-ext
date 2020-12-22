@@ -1,6 +1,7 @@
 package com.photowey.flowable.ext.command.storage;
 
-import com.photowey.flowable.ext.command.context.TestCommandContext;
+import com.photowey.flowable.ext.command.cmd.TestCommandContext;
+import com.photowey.flowable.ext.plugin.api.storage.Storage;
 
 /**
  * TestStorage

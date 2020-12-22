@@ -1,6 +1,5 @@
 package com.photowey.flowable.ext.command.cmd;
 
-import com.photowey.flowable.ext.command.context.TestCommandContext;
 import com.photowey.flowable.ext.command.factory.TestCommandFactory;
 import com.photowey.flowable.ext.command.payload.TestPayload;
 import org.junit.jupiter.api.Test;
