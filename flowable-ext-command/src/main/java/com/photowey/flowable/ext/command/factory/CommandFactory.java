@@ -13,7 +13,7 @@ import com.photowey.flowable.ext.plugin.api.context.AbstractCommandContext;
  * @date 2020/12/19
  * @since 1.0.0
  */
-public interface CommandFactory<T extends AbstractCommandContext, C extends Command> {
+public interface CommandFactory<T extends AbstractCommandContext, C extends Command<T, ?>> {
 
     /**
      * Create the context.

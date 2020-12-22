@@ -87,7 +87,7 @@ public abstract class AbstractCommandAdapter<T extends AbstractCommandContext, R
         // Init the command
         this.init(context);
 
-        Feature feature = context.getFeature();
+        Feature<T> feature = context.getFeature();
 
         // Apply Feature
         this.preInspect(context);

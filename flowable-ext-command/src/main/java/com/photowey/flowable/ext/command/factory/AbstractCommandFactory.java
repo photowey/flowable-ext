@@ -11,7 +11,7 @@ import com.photowey.flowable.ext.plugin.api.feature.Feature;
  * @date 2020/12/19
  * @since 1.0.0
  */
-public abstract class AbstractCommandFactory<T extends AbstractCommandContext, F extends Feature> {
+public abstract class AbstractCommandFactory<T extends AbstractCommandContext, F extends Feature<T>> {
 
     /**
      * Require execute user.
