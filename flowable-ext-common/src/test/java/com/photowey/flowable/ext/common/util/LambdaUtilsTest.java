@@ -1,13 +1,11 @@
 package com.photowey.flowable.ext.common.util;
 
 import com.photowey.flowable.ext.common.hello.Hello;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * LambdaUtilsTest
@@ -16,9 +14,11 @@ import java.util.stream.Collectors;
  * @date 2020/12/21
  * @since 1.0.0
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LambdaUtilsTest {
 
     @Test
+    @Order(1)
     public void testTransferList() {
         List<Hello> hellos = this.populateHellos();
         List<Long> ids = LambdaUtils.transferToList(hellos, Hello::getId);
@@ -29,6 +29,7 @@ public class LambdaUtilsTest {
     }
 
     @Test
+    @Order(2)
     public void testTransferSet() {
         List<Hello> hellos = this.populateHellos();
         Set<String> names = LambdaUtils.transferToSet(hellos, Hello::getName);
@@ -36,6 +37,7 @@ public class LambdaUtilsTest {
     }
 
     @Test
+    @Order(3)
     public void testFindAny() {
         List<Hello> hellos = this.populateHellos();
         String any = LambdaUtils.findAny(hellos, Hello::getName);
@@ -44,6 +46,7 @@ public class LambdaUtilsTest {
     }
 
     @Test
+    @Order(4)
     public void testFilter() {
         List<Hello> hellos = this.populateHellos();
         List<Hello> helloList = LambdaUtils.filter(hellos, hello -> "photowey".equals(hello.getName()));
@@ -61,6 +64,7 @@ public class LambdaUtilsTest {
     }
 
     @Test
+    @Order(5)
     public void testFilterAny() {
         List<Hello> hellos = this.populateHellos();
         Hello any = LambdaUtils.filterAny(hellos, hello -> "photowey".equals(hello.getName()));
@@ -80,11 +84,6 @@ public class LambdaUtilsTest {
         hellos.add(hello2);
         hellos.add(hello3);
         return hellos;
-    }
-
-    public List<Integer> copy(List<Integer> temps) {
-        List<Integer> collect = temps.stream().map(temp -> temp).collect(Collectors.toList());
-        return collect;
     }
 
 }

@@ -4,7 +4,4 @@ dependencies {
     compile project(":flowable-ext-parent")
     compile project(":flowable-ext-common")
     compile project(":flowable-ext-plugin-api")
-
-    // Test
-    implementation "org.junit.jupiter:junit-jupiter:5.7.0"
 }

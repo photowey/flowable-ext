@@ -1,1 +1,10 @@
 description = "flowable-ext-command-executor"
+
+dependencies {
+    compile project(":flowable-ext-parent")
+    compile project(":flowable-ext-command")
+    compile project(":flowable-ext-common")
+    compile project(":flowable-ext-plugin-api")
+
+    compileOnly("org.springframework:spring-core:${SPRING_CORE}")
+}

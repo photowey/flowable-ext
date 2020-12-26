@@ -1,4 +1,21 @@
 // ================================================================= PLUGINS
+buildscript {
+    ext {
+        SPRING_BOOT_VERSION = "2.4.1"
+    }
+    repositories {
+        mavenLocal()
+        maven {
+            name "aliyun";
+            url "https://maven.aliyun.com/repository/public"
+        }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${SPRING_BOOT_VERSION}")
+    }
+}
 
 plugins {
     id "org.springframework.boot" version "2.4.1"
@@ -6,11 +23,24 @@ plugins {
     id 'java'
 }
 
+
 // ================================================================= SUB_PROJECT
 
 subprojects {
-    apply plugin: 'org.springframework.boot'
     apply plugin: 'java'
+    apply plugin: "org.springframework.boot"
+    apply plugin: "io.spring.dependency-management"
+
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+        }
+    }
+
+    dependencies {
+        // Test
+        testCompile "org.springframework.boot:spring-boot-starter-test"
+    }
 
     test {
         useJUnitPlatform()
@@ -31,6 +61,8 @@ defaultTasks 'build'
 
 allprojects {
     apply plugin: 'java'
+    // Apply declare versions
+    apply from: "${project.rootDir}/versions.gradle"
 
     group 'com.photowey'
     version '1.0.0-SNAPSHOT'
@@ -39,7 +71,10 @@ allprojects {
         sourceCompatibility = JavaVersion.VERSION_1_8
     }
 
-    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+    jar {
+        // for multi module
+        enabled(true)
+    }
 
     repositories {
         mavenLocal()
@@ -61,13 +96,31 @@ allprojects {
         }
     }
 
-    tasks.withType(JavaCompile) {
-        options.encoding = "UTF-8"
+    springBoot {
+        buildInfo()
+    }
+
+    tasks.withType(AbstractCompile).each { it.options.encoding = "${DEFAULT_ENCODING}" }
+
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', "${DEFAULT_ENCODING}")
+        options.addStringOption('charSet', "${DEFAULT_ENCODING}")
     }
 
     configurations.all {
         resolutionStrategy.cacheChangingModulesFor 0, "minutes"
     }
+}
+
+/**
+ * $ gradle -q springBootVersion
+ *
+ * > the project:[flowable-ext] spring-boot version:[2.4.1]
+ * @since 1.0.0
+ */
+task springBootVersion {
+    println("the project:[${project.name}], spring-boot version:[${SPRING_BOOT_VERSION}], encoding:[${DEFAULT_ENCODING}]")
 }
 
 // ================================================================= END
