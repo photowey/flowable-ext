@@ -37,29 +37,37 @@ public class DefaultCommandExecutor<T extends AbstractCommandContext, R> impleme
     public R execute(Command<T, R> command, T context) {
         StopWatch sw = new StopWatch("execute-command");
         sw.start();
-        if (log.isInfoEnabled()) {
-            StringBuilder logInfo = new StringBuilder()
-                    .append(System.lineSeparator())
-                    .append("--- >>> execution command:[").append(command.getClass().getSimpleName()).append("]").append(" <<< ---")
-                    .append(System.lineSeparator());
-            log.info(logInfo.toString());
+        if (log.isDebugEnabled()) {
+            this.printStart(command);
         }
         try {
             return command.execute(context);
         } finally {
-            if (log.isInfoEnabled()) {
+            if (log.isDebugEnabled()) {
                 sw.stop();
-                StringBuilder logInfo = new StringBuilder()
-                        .append(System.lineSeparator())
-                        .append("--- -------------------------------------------------------------")
-                        .append(System.lineSeparator())
-                        .append("\texecution-command:[").append(command.getClass().getSimpleName()).append("]")
-                        .append(System.lineSeparator())
-                        .append("\ttime-cost:[").append(sw.getTotalTimeMillis()).append(" ms").append("]")
-                        .append(System.lineSeparator())
-                        .append("--- -------------------------------------------------------------");
-                log.info(logInfo.toString());
+                this.printStop(command, sw);
             }
         }
+    }
+
+    private void printStart(Command<T, R> command) {
+        StringBuilder logInfo = new StringBuilder()
+                .append(System.lineSeparator())
+                .append("--- >>> execution command:[").append(command.getClass().getSimpleName()).append("]").append(" <<< ---")
+                .append(System.lineSeparator());
+        log.debug(logInfo.toString());
+    }
+
+    private void printStop(Command<T, R> command, StopWatch sw) {
+        StringBuilder logInfo = new StringBuilder()
+                .append(System.lineSeparator())
+                .append("--- -------------------------------------------------------------")
+                .append(System.lineSeparator())
+                .append("\texecution-command:[").append(command.getClass().getSimpleName()).append("]")
+                .append(System.lineSeparator())
+                .append("\ttime-cost:[").append(sw.getTotalTimeMillis()).append(" ms").append("]")
+                .append(System.lineSeparator())
+                .append("--- -------------------------------------------------------------");
+        log.debug(logInfo.toString());
     }
 }

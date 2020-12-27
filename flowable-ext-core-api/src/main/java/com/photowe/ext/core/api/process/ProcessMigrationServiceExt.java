@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-core"
+package com.photowe.ext.core.api.process;
 
-dependencies {
-    // Parent
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-core-api")
+/**
+ * {@code ProcessMigrationServiceExt} is an interface that extends {@link org.flowable.engine.ProcessMigrationService}
+ *
+ * @author photowey
+ * @date 2020/12/28
+ * @since 1.0.0
+ */
+public interface ProcessMigrationServiceExt {
 }

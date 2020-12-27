@@ -14,10 +14,27 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-core"
+package com.photowe.ext.core.api.engine;
 
-dependencies {
-    // Parent
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-core-api")
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * ProcessEngineExtTest
+ *
+ * @author photowey
+ * @date 2020/12/28
+ * @since 1.0.0
+ */
+public class ProcessEngineExtTest {
+
+    private static final Logger log = LoggerFactory.getLogger(ProcessEngineExtTest.class);
+
+    @Test
+    public void testHello() {
+        if (log.isDebugEnabled()) {
+            log.debug("hello-world~");
+        }
+    }
 }

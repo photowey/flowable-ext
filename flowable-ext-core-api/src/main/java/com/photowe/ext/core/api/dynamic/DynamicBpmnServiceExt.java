@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-core"
+package com.photowe.ext.core.api.dynamic;
 
-dependencies {
-    // Parent
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-core-api")
+/**
+ * {@code DynamicBpmnServiceExt} is an interface that extends {@link org.flowable.engine.DynamicBpmnService}
+ *
+ * @author photowey
+ * @date 2020/12/28
+ * @since 1.0.0
+ */
+public interface DynamicBpmnServiceExt {
 }

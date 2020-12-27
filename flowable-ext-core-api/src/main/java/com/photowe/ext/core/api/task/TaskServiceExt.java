@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-core"
+package com.photowe.ext.core.api.task;
 
-dependencies {
-    // Parent
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-core-api")
+/**
+ * {@code TaskServiceExt} is an interface that extends {@link org.flowable.engine.TaskService}
+ *
+ * @author photowey
+ * @date 2020/12/28
+ * @since 1.0.0
+ */
+public interface TaskServiceExt {
 }
