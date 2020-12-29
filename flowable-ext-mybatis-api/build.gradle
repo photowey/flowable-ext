@@ -15,3 +15,10 @@
  */
 
 description = "flowable-ext-mybatis-api"
+
+dependencies {
+    // Parent
+    compile project(":flowable-ext-parent")
+    compile "org.mybatis:mybatis:${MYBATIS_VERSION}"
+    compile "org.mybatis:mybatis-spring:${MYBATIS_SPRING_VERSION}"
+}

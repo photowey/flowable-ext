@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright © 2020 photowey (photowey@gmail.com)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+@author photowey
+@date 2020/12/30
+@since 1.0.0
+-->
+<mapper namespace="com.photowey.flowable.ext.mybatis.api.mapper.NativeQueryMapper">
+    <!--
+        count
+        @param customSql
+        @author photowey
+        @date 2020/12/30
+        @since 1.0.0
+    -->
+    <select id="count"
+            parameterType="com.photowey.flowable.ext.mybatis.api.model.NativeQueryAdaptor"
+            resultType="java.lang.Long">
+        ${query.customSQL}
+    </select>
+
+    <!--
+        singleResult
+        @param customSql
+        @author photowey
+        @date 2020/12/30
+        @since 1.0.0
+    -->
+    <select id="singleResult"
+            parameterType="com.photowey.flowable.ext.mybatis.api.model.NativeQueryAdaptor"
+            resultType="java.util.Map">
+        ${query.customSQL}
+    </select>
+
+    <!--
+        list
+        @param customSql
+        @author photowey
+        @date 2020/12/30
+        @since 1.0.0
+    -->
+    <select id="list"
+            parameterType="com.photowey.flowable.ext.mybatis.api.model.NativeQueryAdaptor"
+            resultType="java.util.Map">
+        ${query.customSQL}
+    </select>
+
+    <!--
+        selectOne
+        @param customSql
+        @author photowey
+        @date 2020/12/29
+        @since 1.0.0
+    -->
+    <select id="listPage"
+            parameterType="com.photowey.flowable.ext.mybatis.api.model.NativeQueryAdaptor"
+            resultType="java.util.Map">
+        ${query.customSQL} LIMIT #{query.offset}, #{query.limit}
+    </select>
+
+</mapper>

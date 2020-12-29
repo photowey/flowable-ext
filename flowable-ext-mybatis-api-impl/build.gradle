@@ -15,3 +15,10 @@
  */
 
 description = "flowable-ext-mybatis-api-impl"
+
+
+dependencies {
+    // Parent
+    compile project(":flowable-ext-parent")
+    compile project(":flowable-ext-mybatis-api")
+}
