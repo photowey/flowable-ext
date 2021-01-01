@@ -14,12 +14,23 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-mybatis-api"
+package com.photowe.ext.core.dynamic.bpmn.impl;
 
-dependencies {
-    // Parent
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-mybatis-model")
-    compile "org.mybatis:mybatis:${MYBATIS_VERSION}"
-    compile "org.mybatis:mybatis-spring:${MYBATIS_SPRING_VERSION}"
+import com.photowe.ext.core.api.dynamic.DynamicBpmnServiceExt;
+import org.flowable.engine.DynamicBpmnService;
+
+/**
+ * DynamicBpmnServiceExtImpl
+ *
+ * @author photowey
+ * @date 2021/01/01
+ * @since 1.0.0
+ */
+public class DynamicBpmnServiceExtImpl implements DynamicBpmnServiceExt {
+
+    private final DynamicBpmnService dynamicBpmnService;
+
+    public DynamicBpmnServiceExtImpl(DynamicBpmnService dynamicBpmnService) {
+        this.dynamicBpmnService = dynamicBpmnService;
+    }
 }

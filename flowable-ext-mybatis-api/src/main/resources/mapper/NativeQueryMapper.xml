@@ -32,7 +32,7 @@
         @since 1.0.0
     -->
     <select id="count"
-            parameterType="com.photowey.flowable.ext.mybatis.api.model.NativeQueryAdaptor"
+            parameterType="com.photowey.flowable.ext.mybatis.model.NativeQueryAdaptor"
             resultType="java.lang.Long">
         ${query.customSQL}
     </select>
@@ -45,7 +45,7 @@
         @since 1.0.0
     -->
     <select id="singleResult"
-            parameterType="com.photowey.flowable.ext.mybatis.api.model.NativeQueryAdaptor"
+            parameterType="com.photowey.flowable.ext.mybatis.model.NativeQueryAdaptor"
             resultType="java.util.Map">
         ${query.customSQL}
     </select>
@@ -58,20 +58,22 @@
         @since 1.0.0
     -->
     <select id="list"
-            parameterType="com.photowey.flowable.ext.mybatis.api.model.NativeQueryAdaptor"
+            parameterType="com.photowey.flowable.ext.mybatis.model.NativeQueryAdaptor"
             resultType="java.util.Map">
         ${query.customSQL}
     </select>
 
     <!--
-        selectOne
+        listPage
         @param customSql
+        @param offset
+        @param limit
         @author photowey
         @date 2020/12/29
         @since 1.0.0
     -->
     <select id="listPage"
-            parameterType="com.photowey.flowable.ext.mybatis.api.model.NativeQueryAdaptor"
+            parameterType="com.photowey.flowable.ext.mybatis.model.NativeQueryAdaptor"
             resultType="java.util.Map">
         ${query.customSQL} LIMIT #{query.offset}, #{query.limit}
     </select>

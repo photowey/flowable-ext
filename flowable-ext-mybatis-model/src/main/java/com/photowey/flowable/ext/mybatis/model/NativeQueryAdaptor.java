@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.photowey.flowable.ext.mybatis.api.model;
+package com.photowey.flowable.ext.mybatis.model;
 
 import java.io.Serializable;
 
@@ -34,9 +34,6 @@ public class NativeQueryAdaptor implements Serializable {
     private Integer offset;
     private Integer limit;
 
-    private Integer pageNo;
-    private Integer pageSize;
-
     public String getCustomSQL() {
         return customSQL;
     }
@@ -46,14 +43,6 @@ public class NativeQueryAdaptor implements Serializable {
     }
 
     public int getOffset() {
-        if (null == this.offset) {
-            if (null != pageNo && null != pageSize) {
-                this.offset = (pageNo - 1) * pageSize;
-            } else {
-                throw new IllegalArgumentException("illegal argument:[offset || pageNo || pageSize]");
-            }
-        }
-
         return offset;
     }
 
@@ -62,35 +51,11 @@ public class NativeQueryAdaptor implements Serializable {
     }
 
     public int getLimit() {
-        if (null == limit) {
-            if (null != pageSize) {
-                this.limit = pageSize;
-            } else {
-                throw new IllegalArgumentException("illegal argument:[limit]");
-            }
-        }
-
         return limit;
     }
 
     public void setLimit(int limit) {
         this.limit = limit;
-    }
-
-    public int getPageNo() {
-        return pageNo;
-    }
-
-    public void setPageNo(int pageNo) {
-        this.pageNo = pageNo;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
     }
 
     public static NativeQueryAdaptor.NativeQueryAdaptorBuilder builder() {
@@ -100,12 +65,10 @@ public class NativeQueryAdaptor implements Serializable {
     public NativeQueryAdaptor() {
     }
 
-    public NativeQueryAdaptor(final String customSQL, final Integer offset, final Integer limit, final Integer pageNo, final Integer pageSize) {
+    public NativeQueryAdaptor(final String customSQL, final Integer offset, final Integer limit) {
         this.customSQL = customSQL;
         this.offset = offset;
         this.limit = limit;
-        this.pageNo = pageNo;
-        this.pageSize = pageSize;
     }
 
     public static class NativeQueryAdaptorBuilder {
@@ -133,22 +96,12 @@ public class NativeQueryAdaptor implements Serializable {
             return this;
         }
 
-        public NativeQueryAdaptor.NativeQueryAdaptorBuilder pageNo(final Integer pageNo) {
-            this.pageNo = pageNo;
-            return this;
-        }
-
-        public NativeQueryAdaptor.NativeQueryAdaptorBuilder pageSize(final Integer pageSize) {
-            this.pageSize = pageSize;
-            return this;
-        }
-
         public NativeQueryAdaptor build() {
-            return new NativeQueryAdaptor(this.customSQL, this.offset, this.limit, this.pageNo, this.pageSize);
+            return new NativeQueryAdaptor(this.customSQL, this.offset, this.limit);
         }
 
         public String toString() {
-            return "NativeQueryAdaptor.NativeQueryAdaptorBuilder(customSQL=" + this.customSQL + ", offset=" + this.offset + ", limit=" + this.limit + ", pageNo=" + this.pageNo + ", pageSize=" + this.pageSize + ")";
+            return "NativeQueryAdaptor.NativeQueryAdaptorBuilder(customSQL=" + this.customSQL + ", offset=" + this.offset + ", limit=" + this.limit + ")";
         }
     }
 }

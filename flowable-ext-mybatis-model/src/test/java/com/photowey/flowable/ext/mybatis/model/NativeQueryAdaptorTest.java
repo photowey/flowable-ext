@@ -14,30 +14,29 @@
  * limitations under the License.
  */
 
-package com.photowey.flowable.ext.mybatis.api.mapper;
+package com.photowey.flowable.ext.mybatis.model;
 
-import com.photowey.flowable.ext.mybatis.model.NativeQueryAdaptor;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
-import java.util.Map;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
- * NativeQueryMapper
+ * NativeQueryAdaptorTest
  *
  * @author photowey
- * @date 2020/12/30
+ * @date 2021/01/01
  * @since 1.0.0
  */
-@Mapper
-public interface NativeQueryMapper {
+public class NativeQueryAdaptorTest {
 
-    Long count(@Param("query") NativeQueryAdaptor query);
+    @Test
+    public void testNativeQueryAdaptor() {
+        NativeQueryAdaptor queryAdaptor = NativeQueryAdaptor
+                .builder()
+                .customSQL("SELECT * FROM act_ru_task t WHERE t.ID_ = ‘64300273238093185’ ")
+                .offset(1)
+                .limit(1)
+                .build();
 
-    Map<String, Object> singleResult(@Param("query") NativeQueryAdaptor query);
-
-    List<Map<String, Object>> list(@Param("query") NativeQueryAdaptor query);
-
-    List<Map<String, Object>> listPage(@Param("query") NativeQueryAdaptor query);
+        Assertions.assertEquals(1, queryAdaptor.getOffset(), "Assert NativeQueryAdaptor.offset: Error");
+    }
 }

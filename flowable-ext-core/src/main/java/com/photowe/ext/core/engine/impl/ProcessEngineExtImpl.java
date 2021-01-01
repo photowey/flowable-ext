@@ -26,6 +26,7 @@ import com.photowe.ext.core.api.process.ProcessMigrationServiceExt;
 import com.photowe.ext.core.api.repository.RepositoryServiceExt;
 import com.photowe.ext.core.api.runtime.RuntimeServiceExt;
 import com.photowe.ext.core.api.task.TaskServiceExt;
+import com.photowey.flowable.ext.mybatis.api.service.NativeQueryService;
 import org.flowable.engine.ProcessEngine;
 import org.flowable.engine.ProcessEngineConfiguration;
 
@@ -109,6 +110,11 @@ public class ProcessEngineExtImpl implements ProcessEngineExt {
     @Override
     public ProcessEngineConfiguration getProcessEngineConfiguration() {
         // TODO
+        return null;
+    }
+
+    @Override
+    public NativeQueryService getNativeQueryService() {
         return null;
     }
 }

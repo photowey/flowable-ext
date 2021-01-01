@@ -14,12 +14,8 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-mybatis-api"
+description = "flowable-ext-mybatis-model"
 
 dependencies {
-    // Parent
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-mybatis-model")
-    compile "org.mybatis:mybatis:${MYBATIS_VERSION}"
-    compile "org.mybatis:mybatis-spring:${MYBATIS_SPRING_VERSION}"
+
 }

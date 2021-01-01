@@ -76,7 +76,6 @@ defaultTasks 'build'
 // ================================================================= ALL_PROJECTS
 
 allprojects {
-    apply plugin: 'java'
     // Apply declare versions
     apply from: "${project.rootDir}/versions.gradle"
 

@@ -17,29 +17,21 @@
 package com.photowey.flowable.ext.mybatis.api.query;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
 /**
- * {@code NativeQueryExt} is an interface that extends(ext) {@code org.flowable.common.engine.api.query.NativeQuery}
- * provides access to flowable database by native SQL.
+ * Criteria
  *
  * @author photowey
- * @date 2020/12/30
+ * @date 2021/01/01
  * @since 1.0.0
  */
-public interface NativeQueryExt<Q extends NativeQueryExt<Q>> extends Criteria<Map<String, Object>> {
+public interface Criteria<T> {
 
-    Q customSQL(final String customSQL);
+    long count();
 
-    Q pageNo(final int pageNo);
+    T singleResult();
 
-    Q pagSize(final int pageSize);
+    List<T> list();
 
-    <U> U singleResult(Function<Map<String, Object>, U> converter);
-
-    <U> List<U> list(Function<Map<String, Object>, U> converter);
-
-    <U> List<U> listPage(Function<Map<String, Object>, U> converter);
-
+    List<T> listPage(int offset, int limit);
 }

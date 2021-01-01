@@ -14,12 +14,23 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-mybatis-api"
+package com.photowe.ext.core.management.impl;
 
-dependencies {
-    // Parent
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-mybatis-model")
-    compile "org.mybatis:mybatis:${MYBATIS_VERSION}"
-    compile "org.mybatis:mybatis-spring:${MYBATIS_SPRING_VERSION}"
+import com.photowe.ext.core.api.management.ManagementServiceExt;
+import org.flowable.engine.ManagementService;
+
+/**
+ * ManagementServiceExtImpl
+ *
+ * @author photowey
+ * @date 2021/01/01
+ * @since 1.0.0
+ */
+public class ManagementServiceExtImpl implements ManagementServiceExt {
+
+    private final ManagementService managementService;
+
+    public ManagementServiceExtImpl(ManagementService managementService) {
+        this.managementService = managementService;
+    }
 }

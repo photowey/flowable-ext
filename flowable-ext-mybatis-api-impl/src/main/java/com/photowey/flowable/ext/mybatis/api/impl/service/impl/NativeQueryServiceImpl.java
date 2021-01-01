@@ -17,8 +17,10 @@
 package com.photowey.flowable.ext.mybatis.api.impl.service.impl;
 
 import com.photowey.flowable.ext.mybatis.api.mapper.NativeQueryMapper;
-import com.photowey.flowable.ext.mybatis.api.model.NativeQueryAdaptor;
+import com.photowey.flowable.ext.mybatis.api.query.NativeQueryExt;
+import com.photowey.flowable.ext.mybatis.api.query.NativeQueryExtImpl;
 import com.photowey.flowable.ext.mybatis.api.service.NativeQueryService;
+import com.photowey.flowable.ext.mybatis.model.NativeQueryAdaptor;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +28,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * NativeQueryServiceImpl
+ * {@code NativeQueryServiceImpl} is a class that implements the {@link NativeQueryService},
+ * provides all native query operations.
  *
  * @author photowey
  * @date 2020/12/30
@@ -46,25 +49,44 @@ public class NativeQueryServiceImpl implements NativeQueryService {
     }
 
     @Override
+    public NativeQueryExt createNativeQuery() {
+        return new NativeQueryExtImpl(this);
+    }
+
+    @Override
+    public Map<String, Object> singleResult(NativeQueryAdaptor query) {
+        return this.nativeQueryMapper.singleResult(query);
+    }
+
+    @Override
+    public List<Map<String, Object>> list(NativeQueryAdaptor query) {
+        return this.nativeQueryMapper.list(query);
+    }
+
+    @Override
+    public List<Map<String, Object>> listPage(NativeQueryAdaptor query) {
+        return this.nativeQueryMapper.listPage(query);
+    }
+
+    @Override
     public <T> T singleResult(NativeQueryAdaptor query, Function<Map<String, Object>, T> converter) {
-        Map<String, Object> result = this.nativeQueryMapper.singleResult(query);
-        return this.transfer(result, converter);
+        Map<String, Object> row = this.nativeQueryMapper.singleResult(query);
+        return this.transfer(row, converter);
     }
 
     @Override
     public <T> List<T> list(NativeQueryAdaptor query, Function<Map<String, Object>, T> converter) {
-        List<Map<String, Object>> results = this.nativeQueryMapper.list(query);
-        return results.stream().map(result -> this.transfer(result, converter)).collect(Collectors.toList());
+        List<Map<String, Object>> rows = this.nativeQueryMapper.list(query);
+        return rows.stream().map(row -> this.transfer(row, converter)).collect(Collectors.toList());
     }
 
     @Override
     public <T> List<T> listPage(NativeQueryAdaptor query, Function<Map<String, Object>, T> converter) {
-        List<Map<String, Object>> results = this.nativeQueryMapper.listPage(query);
-        return results.stream().map(result -> this.transfer(result, converter)).collect(Collectors.toList());
+        List<Map<String, Object>> rows = this.nativeQueryMapper.listPage(query);
+        return rows.stream().map(row -> this.transfer(row, converter)).collect(Collectors.toList());
     }
 
     public <T> T transfer(Map<String, Object> original, Function<Map<String, Object>, T> converter) {
         return converter.apply(original);
-
     }
 }
