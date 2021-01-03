@@ -14,9 +14,15 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-plugin-api"
+package com.photowe.ext.core.api.processor;
 
-dependencies {
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-common")
+/**
+ * {@code StartProcessPostProcessor} is an interface that provide extensions before and after the start of the process
+ *
+ * @author photowey
+ * @date 2021/01/03
+ * @since 1.0.0
+ */
+public interface StartProcessPostProcessor extends ProcessPostProcessor {
+
 }

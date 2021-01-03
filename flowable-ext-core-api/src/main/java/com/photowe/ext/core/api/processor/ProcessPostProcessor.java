@@ -14,9 +14,16 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-plugin-api"
+package com.photowe.ext.core.api.processor;
 
-dependencies {
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-common")
+/**
+ * {@code ProcessPostProcessor} is an interface that like {@link org.springframework.beans.factory.config.BeanPostProcessor}
+ * provides extensions before and after the action of the process
+ *
+ * @author photowey
+ * @date 2021/01/03
+ * @since 1.0.0
+ */
+public interface ProcessPostProcessor {
+
 }

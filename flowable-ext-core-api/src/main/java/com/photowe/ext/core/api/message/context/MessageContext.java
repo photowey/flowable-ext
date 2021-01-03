@@ -14,9 +14,26 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-plugin-api"
+package com.photowe.ext.core.api.message.context;
 
-dependencies {
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-common")
+import com.photowey.flowable.ext.common.context.Attributes;
+
+import java.util.Properties;
+
+/**
+ * {@code MessageContext} is an interface that provide the context of send message in the action of process
+ *
+ * @author photowey
+ * @date 2021/01/03
+ * @since 1.0.0
+ */
+public interface MessageContext extends Attributes {
+
+    /**
+     * Get the message context.
+     *
+     * @return {@link Properties}
+     */
+    Properties getMessageContext();
+
 }

@@ -60,8 +60,8 @@ public final class LambdaUtils {
         return predicate.test(resource);
     }
 
-    public static <T> List<T> copy(Collection<T> delegates) {
-        List<T> copy = delegates.stream().map(delegate -> delegate).collect(Collectors.toList());
+    public static <T> List<T> copy(Collection<T> candidates) {
+        List<T> copy = candidates.stream().map(candidate -> candidate).collect(Collectors.toList());
         return copy;
     }
 }

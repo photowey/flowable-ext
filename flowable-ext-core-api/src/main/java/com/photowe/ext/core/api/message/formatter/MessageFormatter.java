@@ -14,9 +14,25 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-plugin-api"
+package com.photowe.ext.core.api.message.formatter;
 
-dependencies {
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-common")
+import com.photowe.ext.core.api.message.context.MessageContext;
+
+/**
+ * MessageFormatter
+ *
+ * @author photowey
+ * @date 2021/01/03
+ * @since 1.0.0
+ */
+public interface MessageFormatter {
+
+    /**
+     * Format the message
+     *
+     * @param messageTemplate the template of candidate message
+     * @param context         the message context
+     * @return the message
+     */
+    String format(String messageTemplate, MessageContext context);
 }

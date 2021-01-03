@@ -14,9 +14,14 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-plugin-api"
+package com.photowe.ext.core.api.invoker.handler;
 
-dependencies {
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-common")
+/**
+ * {@code TodoTaskInvokerHandler} is an interface indicating that a bean want to take over handle the query of todoo tasks
+ *
+ * @author photowey
+ * @date 2021/01/03
+ * @since 1.0.0
+ */
+public interface TodoTaskInvokerHandler extends InvokerHandler {
 }

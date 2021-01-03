@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.photowey.flowable.ext.plugin.api.context;
+package com.photowey.flowable.ext.common.context;
 
 import java.util.Map;
 import java.util.function.Supplier;

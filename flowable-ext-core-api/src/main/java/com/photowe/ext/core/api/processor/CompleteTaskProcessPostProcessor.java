@@ -14,9 +14,15 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-plugin-api"
+package com.photowe.ext.core.api.processor;
 
-dependencies {
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-common")
+/**
+ * {@code CompleteTaskProcessPostProcessor} is an interface that provides processing complete task before and after expansion
+ *
+ * @author photowey
+ * @date 2021/01/03
+ * @since 1.0.0
+ */
+public interface CompleteTaskProcessPostProcessor extends ProcessPostProcessor {
+
 }

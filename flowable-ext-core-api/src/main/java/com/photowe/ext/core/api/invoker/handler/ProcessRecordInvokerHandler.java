@@ -14,9 +14,15 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-plugin-api"
+package com.photowe.ext.core.api.invoker.handler;
 
-dependencies {
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-common")
+/**
+ * {@code ProcessRecordInvokerHandler} is an interface indicating that a bean
+ * want to take over handle the query of the process record collection
+ *
+ * @author photowey
+ * @date 2021/01/03
+ * @since 1.0.0
+ */
+public interface ProcessRecordInvokerHandler extends InvokerHandler {
 }

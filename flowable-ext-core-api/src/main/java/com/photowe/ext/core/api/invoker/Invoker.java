@@ -14,9 +14,15 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-plugin-api"
+package com.photowe.ext.core.api.invoker;
 
-dependencies {
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-common")
+/**
+ * {@code Invoker} is a marker superinterface indicating that a bean is available to be
+ * notified by the {@link com.photowe.ext.core.api.engine.ProcessEngineExt}.
+ *
+ * @author photowey
+ * @date 2021/01/03
+ * @since 1.0.0
+ */
+public interface Invoker {
 }

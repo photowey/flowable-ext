@@ -14,28 +14,27 @@
  * limitations under the License.
  */
 
-package com.photowey.flowable.ext.plugin.api.context;
+package com.photowe.ext.core.api.message.context;
 
-import com.photowey.flowable.ext.common.context.Attributes;
-import com.photowey.flowable.ext.plugin.api.feature.Feature;
-
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Properties;
+import java.util.Set;
 import java.util.function.Supplier;
 
 /**
- * CommandContext
+ * {@code DefaultMessageContext} is a default context that implements the {@link MessageContext}
  *
  * @author photowey
- * @date 2020/12/19
+ * @date 2021/01/03
  * @since 1.0.0
  */
-public abstract class AbstractCommandContext implements Attributes {
+public class DefaultMessageContext implements MessageContext {
 
     /**
      * The attributes container
      */
-    private Map<String, Object> attributes = new ConcurrentHashMap<>();
+    private Properties attributes = new Properties();
 
     /**
      * Set Attribute.
@@ -69,6 +68,21 @@ public abstract class AbstractCommandContext implements Attributes {
      */
     @Override
     public Map<String, Object> getAttributes() {
+        int initialCapacity = (int) Math.ceil((this.attributes.entrySet().size()) / 0.75) + 1;
+        Map<String, Object> context = new HashMap<>(initialCapacity);
+        Set<Map.Entry<Object, Object>> entries = this.attributes.entrySet();
+        entries.forEach(entry -> context.put(String.valueOf(entry.getKey()), entry.getValue()));
+
+        return context;
+    }
+
+    /**
+     * Get the message context.
+     *
+     * @return {@link Properties}
+     */
+    @Override
+    public Properties getMessageContext() {
         return this.attributes;
     }
 
@@ -91,16 +105,4 @@ public abstract class AbstractCommandContext implements Attributes {
         return expect;
     }
 
-    /**
-     * The command Feature
-     */
-    public Feature feature;
-
-    public Feature getFeature() {
-        return feature;
-    }
-
-    public void setFeature(Feature feature) {
-        this.feature = feature;
-    }
 }
