@@ -14,18 +14,25 @@
  * limitations under the License.
  */
 
-ext {
-    DEFAULT_ENCODING = "UTF-8"
+package com.photowey.flowable.ext.common.event;
 
-    SPRING_BOOT_VERSION = "2.4.1"
-    SPRING_CORE = "5.3.2"
+/**
+ * TestEvent
+ *
+ * @author photowey
+ * @date 2021/01/09
+ * @since 1.0.0
+ */
+public class TestEvent implements Event<String> {
 
-    FLOWABLE_VERSION = "6.6.0"
-    MYBATIS_PLUS_VERSION = "3.4.1"
+    private final String source;
 
-    SLF4J_VERSION = "1.7.30"
-    JUPITER_VERSION = "5.7.0"
-    MYBATIS_VERSION = "3.5.6"
-    MYBATIS_SPRING_VERSION = "2.0.6"
-    GUAVA_VERSION = "30.1-jre"
+    public TestEvent(String source) {
+        this.source = source;
+    }
+
+    @Override
+    public String getSource() {
+        return source;
+    }
 }

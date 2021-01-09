@@ -19,4 +19,5 @@ description = "flowable-ext-common"
 dependencies {
     // Parent
     compile project(":flowable-ext-parent")
+    compile "com.google.guava:guava:${GUAVA_VERSION}"
 }

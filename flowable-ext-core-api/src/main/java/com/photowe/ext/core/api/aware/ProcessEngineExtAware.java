@@ -20,7 +20,7 @@ import com.photowe.ext.core.api.engine.ProcessEngineExt;
 import org.springframework.beans.factory.Aware;
 
 /**
- * {@code ProcessEngineExtAware} is a marker interface indicating that
+ * {@code ProcessEngineExtAware} is an marker interface indicating that
  * a bean want to inject the {@link com.photowe.ext.core.api.engine.ProcessEngineExt} instance
  *
  * @author photowey
