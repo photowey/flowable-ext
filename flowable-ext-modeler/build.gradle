@@ -1,0 +1,14 @@
+description = "flowable-ext-modeler"
+
+dependencies {
+    // Parent
+    compile project(":flowable-ext-parent")
+    // Flowable
+    compile "org.flowable:flowable-spring-boot-starter:${FLOWABLE_VERSION}"
+    // MySQL
+    compile 'mysql:mysql-connector-java'
+    // Web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
