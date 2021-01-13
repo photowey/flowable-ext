@@ -3,12 +3,14 @@ description = "flowable-ext-modeler"
 dependencies {
     // Parent
     compile project(":flowable-ext-parent")
-    // Flowable
-    compile "org.flowable:flowable-spring-boot-starter:${FLOWABLE_VERSION}"
+    // Modeler-Dependency
+    compile project(":flowable-ext-modeler-dependency")
     // MySQL
     compile 'mysql:mysql-connector-java'
     // Web
     implementation 'org.springframework.boot:spring-boot-starter-web'
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // TODO SLF4J: Class path contains multiple SLF4J bindings.
 }

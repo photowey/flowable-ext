@@ -16,10 +16,12 @@
 
 package com.photowey.flowable.ext.modeler;
 
+import com.photowey.flowable.ext.modeler.annotation.EnableFlowableModeler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 
@@ -33,7 +35,8 @@ import java.net.UnknownHostException;
  * @date 2021/01/12
  * @since 1.0.0
  */
-@SpringBootApplication
+@EnableFlowableModeler
+@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class ModelerApp {
 
     private static final Logger log = LoggerFactory.getLogger(ModelerApp.class);
@@ -41,21 +44,16 @@ public class ModelerApp {
     public static void main(String[] args) throws UnknownHostException {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(ModelerApp.class, args);
         ConfigurableEnvironment environment = applicationContext.getEnvironment();
-        String PORT = environment.getProperty("server.port");
-        String HOST = InetAddress.getLocalHost().getHostAddress();
+        String port = environment.getProperty("server.port");
+        String host = InetAddress.getLocalHost().getHostAddress();
         log.info("\n----------------------------------------------------------\n\t" +
-                        "Bootstrap: '{}' is Success!\n\t" +
-                        "Local: \t\t{}://{}:{}\n\t" +
+                        "Application: '{}' is running! Access URLs:\n\t" +
                         "Index: \t\t{}://{}:{}{}\n\t" +
-                        "External: \t{}://{}:{}\n\t" +
                         "Profile(s): dev\n----------------------------------------------------------\n",
-                // Bootstrap
-                "ModelerApp " + " Context",
-                // Local
-                "http", HOST, PORT,
-                "http", HOST, PORT, "/index.html",
-                // External
-                "http", HOST, PORT
+                // Application
+                "Modeler",
+                // Index
+                "http", host, port, "/index.html"
         );
     }
 }

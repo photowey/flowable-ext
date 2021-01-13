@@ -20,6 +20,20 @@ logging:
 flowable:
   async-executor-activate: false
   database-schema-update: true
+  rest-api-enabled: true
+  histrory-level: "full"
+  modeler:
+    app:
+      rest-enabled: true
+  rest:
+    app:
+      authentication-mode: "verify-privilege"
+
+mybatis-plus:
+  mapper-locations: "classpath:/META-INF/modeler-mybatis-mappings/*.xml"
+  configuration-properties.prefix: ""
+  configuration-properties.boolValue: TRUE
+  configuration-properties.blobType: BLOB
 
 local:
   mysql:

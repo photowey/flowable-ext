@@ -1,0 +1,18 @@
+description = "flowable-ext-modeler-dependency"
+
+dependencies {
+    // Parent
+    compile project(":flowable-ext-parent")
+    // Flowable
+    compile "org.flowable:flowable-spring-boot-starter:${FLOWABLE_VERSION}"
+    compile "org.flowable:flowable-ui-modeler-conf:${FLOWABLE_VERSION}"
+    compile "org.flowable:flowable-ui-modeler-logic:${FLOWABLE_VERSION}"
+    compile "org.flowable:flowable-ui-modeler-rest:${FLOWABLE_VERSION}"
+    compile "org.flowable:flowable-ui-common:${FLOWABLE_VERSION}"
+    compile "org.flowable:flowable-ui-idm-rest:${FLOWABLE_VERSION}"
+    compile "org.flowable:flowable-ui-idm-conf:${FLOWABLE_VERSION}"
+    compile "com.baomidou:mybatis-plus-boot-starter:${MYBATIS_PLUS_VERSION}"
+
+    // Liquibase
+    compile "org.liquibase:liquibase-core:${LIQUIBASE_VERSION}"
+}
