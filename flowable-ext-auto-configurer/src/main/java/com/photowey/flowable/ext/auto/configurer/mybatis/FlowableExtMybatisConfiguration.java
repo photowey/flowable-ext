@@ -14,23 +14,20 @@
  * limitations under the License.
  */
 
-package com.photowe.ext.core.management.impl;
+package com.photowey.flowable.ext.auto.configurer.mybatis;
 
-import com.photowe.ext.core.api.engine.ProcessEngineExt;
-import com.photowe.ext.core.api.management.ManagementServiceExt;
+import org.springframework.context.annotation.Configuration;
 
 /**
- * ManagementServiceExtImpl
+ * {@code FlowableExtMybatisAutoConfiguration}
  *
  * @author photowey
- * @date 2021/01/01
+ * @date 2021/01/18
  * @since 1.0.0
  */
-public class ManagementServiceExtImpl implements ManagementServiceExt {
+@Configuration
+public class FlowableExtMybatisConfiguration {
 
-    private final ProcessEngineExt processEngineExt;
+    // TODO
 
-    public ManagementServiceExtImpl(ProcessEngineExt processEngineExt) {
-        this.processEngineExt = processEngineExt;
-    }
 }

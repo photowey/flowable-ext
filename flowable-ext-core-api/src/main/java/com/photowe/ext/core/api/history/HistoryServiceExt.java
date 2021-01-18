@@ -16,6 +16,8 @@
 
 package com.photowe.ext.core.api.history;
 
+import org.flowable.engine.HistoryService;
+
 /**
  * {@code HistoryServiceExt} is an interface that extends {@link org.flowable.engine.HistoryService}
  *
@@ -23,5 +25,6 @@ package com.photowe.ext.core.api.history;
  * @date 2020/12/28
  * @since 1.0.0
  */
-public interface HistoryServiceExt {
+public interface HistoryServiceExt extends HistoryService {
+
 }

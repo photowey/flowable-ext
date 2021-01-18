@@ -16,6 +16,8 @@
 
 package com.photowe.ext.core.api.form;
 
+import org.flowable.engine.FormService;
+
 /**
  * {@code FormServiceExt} is an interface that extends {@link org.flowable.engine.FormService}
  *
@@ -23,5 +25,6 @@ package com.photowe.ext.core.api.form;
  * @date 2020/12/28
  * @since 1.0.0
  */
-public interface FormServiceExt {
+public interface FormServiceExt extends FormService {
+
 }

@@ -20,6 +20,8 @@ dependencies {
     // Parent
     compile project(":flowable-ext-parent")
     compile project(":flowable-ext-mybatis-model")
+
     compile "org.mybatis:mybatis:${MYBATIS_VERSION}"
     compile "org.mybatis:mybatis-spring:${MYBATIS_SPRING_VERSION}"
+    compile "com.alibaba:druid-spring-boot-starter:${DRUID_STARTER_VERSION}"
 }

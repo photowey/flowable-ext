@@ -16,7 +16,9 @@
 
 package com.photowe.ext.core.repository.impl;
 
+import com.photowe.ext.core.api.engine.ProcessEngineExt;
 import com.photowe.ext.core.api.repository.RepositoryServiceExt;
+import com.photowe.ext.core.repository.AbstractRepositoryServiceDelegate;
 import org.flowable.engine.RepositoryService;
 
 /**
@@ -26,11 +28,16 @@ import org.flowable.engine.RepositoryService;
  * @date 2021/01/01
  * @since 1.0.0
  */
-public class RepositoryServiceExtImpl implements RepositoryServiceExt {
+public class RepositoryServiceExtImpl extends AbstractRepositoryServiceDelegate implements RepositoryServiceExt {
 
-    private final RepositoryService repositoryService;
+    private final ProcessEngineExt processEngineExt;
 
-    public RepositoryServiceExtImpl(RepositoryService repositoryService) {
-        this.repositoryService = repositoryService;
+    public RepositoryServiceExtImpl(ProcessEngineExt processEngineExt) {
+        this.processEngineExt = processEngineExt;
+    }
+
+    @Override
+    public RepositoryService getRepositoryService() {
+        return this.processEngineExt.getProcessEngineConfiguration().getRepositoryService();
     }
 }

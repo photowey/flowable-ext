@@ -15,3 +15,17 @@
  */
 
 description = "flowable-ext-auto-configurer"
+
+dependencies {
+    compile project(":flowable-ext-parent")
+    compile project(":flowable-ext-common")
+    compile project(":flowable-ext-core")
+    compile project(":flowable-ext-mybatis-api")
+
+    compile "org.springframework.boot:spring-boot-starter"
+    compile "org.springframework.boot:spring-boot-starter-jdbc"
+
+    compile 'org.springframework.boot:spring-boot-configuration-processor'
+    compile 'org.springframework.boot:spring-boot-autoconfigure'
+
+}

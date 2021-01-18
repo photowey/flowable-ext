@@ -16,6 +16,8 @@
 
 package com.photowe.ext.core.api.repository;
 
+import org.flowable.engine.RepositoryService;
+
 /**
  * {@code RepositoryServiceExt} is an interface that extends {@link org.flowable.engine.RepositoryService}
  *
@@ -23,5 +25,6 @@ package com.photowe.ext.core.api.repository;
  * @date 2020/12/28
  * @since 1.0.0
  */
-public interface RepositoryServiceExt {
+public interface RepositoryServiceExt extends RepositoryService {
+
 }

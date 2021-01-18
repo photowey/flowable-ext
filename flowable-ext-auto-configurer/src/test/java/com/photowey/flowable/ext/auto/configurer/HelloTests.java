@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 
-package com.photowe.ext.core.management.impl;
+package com.photowey.flowable.ext.auto.configurer;
 
-import com.photowe.ext.core.api.engine.ProcessEngineExt;
-import com.photowe.ext.core.api.management.ManagementServiceExt;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
- * ManagementServiceExtImpl
+ * HelloTests
  *
  * @author photowey
- * @date 2021/01/01
+ * @date 2021/01/19
  * @since 1.0.0
  */
-public class ManagementServiceExtImpl implements ManagementServiceExt {
+public class HelloTests {
 
-    private final ProcessEngineExt processEngineExt;
-
-    public ManagementServiceExtImpl(ProcessEngineExt processEngineExt) {
-        this.processEngineExt = processEngineExt;
+    @Test
+    public void testHello() {
+        Assertions.assertEquals(1, 1, "test Hello~");
     }
+
 }

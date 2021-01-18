@@ -16,8 +16,8 @@
 
 package com.photowe.ext.core.identity.impl;
 
+import com.photowe.ext.core.api.engine.ProcessEngineExt;
 import com.photowe.ext.core.api.identity.IdentityServiceExt;
-import org.flowable.engine.IdentityService;
 
 /**
  * IdentityServiceExtImpl
@@ -28,10 +28,10 @@ import org.flowable.engine.IdentityService;
  */
 public class IdentityServiceExtImpl implements IdentityServiceExt {
 
-    private final IdentityService identityService;
+    private final ProcessEngineExt processEngineExt;
 
-    public IdentityServiceExtImpl(IdentityService identityService) {
-        this.identityService = identityService;
+    public IdentityServiceExtImpl(ProcessEngineExt processEngineExt) {
+        this.processEngineExt = processEngineExt;
     }
 
 }

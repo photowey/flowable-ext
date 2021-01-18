@@ -16,7 +16,9 @@
 
 package com.photowe.ext.core.history.impl;
 
+import com.photowe.ext.core.api.engine.ProcessEngineExt;
 import com.photowe.ext.core.api.history.HistoryServiceExt;
+import com.photowe.ext.core.history.AbstractHistoryServiceDelegate;
 import org.flowable.engine.HistoryService;
 
 /**
@@ -26,11 +28,16 @@ import org.flowable.engine.HistoryService;
  * @date 2021/01/01
  * @since 1.0.0
  */
-public class HistoryServiceExtImpl implements HistoryServiceExt {
+public class HistoryServiceExtImpl extends AbstractHistoryServiceDelegate implements HistoryServiceExt {
 
-    private final HistoryService historyService;
+    private final ProcessEngineExt processEngineExt;
 
-    public HistoryServiceExtImpl(HistoryService historyService) {
-        this.historyService = historyService;
+    public HistoryServiceExtImpl(ProcessEngineExt processEngineExt) {
+        this.processEngineExt = processEngineExt;
+    }
+
+    @Override
+    public HistoryService getHistoryService() {
+        return this.processEngineExt.getProcessEngineConfiguration().getHistoryService();
     }
 }

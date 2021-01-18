@@ -16,7 +16,9 @@
 
 package com.photowe.ext.core.form.impl;
 
+import com.photowe.ext.core.api.engine.ProcessEngineExt;
 import com.photowe.ext.core.api.form.FormServiceExt;
+import com.photowe.ext.core.form.AbstractFormServiceDelegate;
 import org.flowable.engine.FormService;
 
 /**
@@ -26,11 +28,16 @@ import org.flowable.engine.FormService;
  * @date 2021/01/01
  * @since 1.0.0
  */
-public class FormServiceExtImpl implements FormServiceExt {
+public class FormServiceExtImpl extends AbstractFormServiceDelegate implements FormServiceExt {
 
-    private final FormService formService;
+    private final ProcessEngineExt processEngineExt;
 
-    public FormServiceExtImpl(FormService formService) {
-        this.formService = formService;
+    public FormServiceExtImpl(ProcessEngineExt processEngineExt) {
+        this.processEngineExt = processEngineExt;
+    }
+
+    @Override
+    public FormService getFormService() {
+        return this.processEngineExt.getProcessEngineConfiguration().getFormService();
     }
 }
