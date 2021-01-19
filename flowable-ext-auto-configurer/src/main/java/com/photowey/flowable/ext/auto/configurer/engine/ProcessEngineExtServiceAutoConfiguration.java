@@ -17,14 +17,17 @@
 package com.photowey.flowable.ext.auto.configurer.engine;
 
 import com.photowe.ext.core.api.engine.ProcessEngineExt;
+import com.photowe.ext.core.api.engine.inject.ProcessEngineExtInjector;
+import com.photowe.ext.core.dynamic.bpmn.impl.DynamicBpmnServiceExtImpl;
 import com.photowe.ext.core.engine.impl.ProcessEngineExtImpl;
+import com.photowe.ext.core.engine.inject.ProcessEngineExtExtInjector;
 import com.photowey.flowable.ext.auto.configurer.datasource.FlowableExtDatasourceAutoConfiguration;
 import com.photowey.flowable.ext.auto.configurer.mybatis.FlowableExtMybatisConfiguration;
 import com.photowey.flowable.ext.auto.configurer.property.FlowableExtProperties;
-import org.flowable.engine.FormService;
-import org.flowable.engine.HistoryService;
-import org.flowable.engine.ProcessEngine;
-import org.flowable.engine.RepositoryService;
+import com.photowey.flowable.ext.mybatis.api.impl.service.impl.NativeQueryServiceImpl;
+import com.photowey.flowable.ext.mybatis.api.mapper.NativeQueryMapper;
+import com.photowey.flowable.ext.mybatis.api.service.NativeQueryService;
+import org.flowable.engine.*;
 import org.flowable.spring.boot.ProcessEngineServicesAutoConfiguration;
 import org.flowable.spring.boot.condition.ConditionalOnProcessEngine;
 import org.springframework.beans.factory.ObjectProvider;
@@ -46,11 +49,11 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @ConditionalOnProcessEngine
+@Import(value = {FlowableExtMybatisConfiguration.class})
+@EnableConfigurationProperties(FlowableExtProperties.class)
 @ConditionalOnClass(value = {ProcessEngine.class, ProcessEngineExt.class})
 @AutoConfigureBefore(value = {ProcessEngineServicesAutoConfiguration.class})
 @AutoConfigureAfter(value = {FlowableExtDatasourceAutoConfiguration.class})
-@EnableConfigurationProperties(FlowableExtProperties.class)
-@Import(value = {FlowableExtMybatisConfiguration.class})
 public class ProcessEngineExtServiceAutoConfiguration {
 
     /**
@@ -63,6 +66,30 @@ public class ProcessEngineExtServiceAutoConfiguration {
     @ConditionalOnMissingBean(ProcessEngineExt.class)
     public ProcessEngineExt processEngineExt(ObjectProvider<ProcessEngine> processEngineObjectProvider) {
         return new ProcessEngineExtImpl(processEngineObjectProvider.getIfAvailable());
+    }
+
+    /**
+     * Create {@link ProcessEngineExtInjector} instance if necessary.
+     *
+     * @param processEngineExt {@link ProcessEngineExt
+     * @return {@link ProcessEngineExtInjector }
+     */
+    @Bean
+    @ConditionalOnMissingBean(ProcessEngineExtInjector.class)
+    public ProcessEngineExtInjector processEngineExtInjector(ProcessEngineExt processEngineExt) {
+        return new ProcessEngineExtExtInjector(processEngineExt);
+    }
+
+    /**
+     * Create {@link DynamicBpmnService} instance if necessary.
+     *
+     * @param processEngineExt {@link ProcessEngineExt
+     * @return {@link DynamicBpmnService }
+     */
+    @Bean
+    @ConditionalOnMissingBean(DynamicBpmnService.class)
+    public DynamicBpmnService dynamicBpmnServiceByProcessEngine(ProcessEngineExt processEngineExt) {
+        return new DynamicBpmnServiceExtImpl(processEngineExt);
     }
 
     /**
@@ -90,6 +117,42 @@ public class ProcessEngineExtServiceAutoConfiguration {
     }
 
     /**
+     * Create {@link IdentityService} instance if necessary.
+     *
+     * @param processEngineExt {@link ProcessEngineExt
+     * @return {@link IdentityService}
+     */
+    @Bean
+    @ConditionalOnMissingBean(IdentityService.class)
+    public IdentityService identityServiceByProcessEngine(ProcessEngineExt processEngineExt) {
+        return processEngineExt.getIdentityService();
+    }
+
+    /**
+     * Create {@link ManagementService} instance if necessary.
+     *
+     * @param processEngineExt {@link ProcessEngineExt
+     * @return {@link ManagementService}
+     */
+    @Bean
+    @ConditionalOnMissingBean(ManagementService.class)
+    public ManagementService managementServiceByProcessEngine(ProcessEngineExt processEngineExt) {
+        return processEngineExt.getManagementService();
+    }
+
+    /**
+     * Create {@link ProcessMigrationService} instance if necessary.
+     *
+     * @param processEngineExt {@link ProcessEngineExt
+     * @return {@link ProcessMigrationService}
+     */
+    @Bean
+    @ConditionalOnMissingBean(ProcessMigrationService.class)
+    public ProcessMigrationService processMigrationServiceByProcessEngine(ProcessEngineExt processEngineExt) {
+        return processEngineExt.getProcessMigrationService();
+    }
+
+    /**
      * Create {@link RepositoryService} instance if necessary.
      *
      * @param processEngineExt {@link ProcessEngineExt
@@ -101,5 +164,28 @@ public class ProcessEngineExtServiceAutoConfiguration {
         return processEngineExt.getRepositoryService();
     }
 
-    // TODO Other services
+    /**
+     * Create {@link RuntimeService} instance if necessary.
+     *
+     * @param processEngineExt {@link ProcessEngineExt
+     * @return {@link RepositoryService}
+     */
+    @Bean
+    @ConditionalOnMissingBean(RuntimeService.class)
+    public RuntimeService runtimeServiceByProcessEngine(ProcessEngineExt processEngineExt) {
+        return processEngineExt.getRuntimeService();
+    }
+
+    /**
+     * Create {@link NativeQueryService} instance if necessary.
+     *
+     * @return {@link NativeQueryService}
+     */
+    @Bean
+    @ConditionalOnMissingBean(NativeQueryService.class)
+    public NativeQueryService nativeQueryService(NativeQueryMapper nativeQueryMapper) {
+        return new NativeQueryServiceImpl(nativeQueryMapper);
+    }
+
+    // TODO
 }

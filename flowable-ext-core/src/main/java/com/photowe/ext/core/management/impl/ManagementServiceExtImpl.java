@@ -18,6 +18,8 @@ package com.photowe.ext.core.management.impl;
 
 import com.photowe.ext.core.api.engine.ProcessEngineExt;
 import com.photowe.ext.core.api.management.ManagementServiceExt;
+import com.photowe.ext.core.management.AbstractManagementServiceDelegate;
+import org.flowable.engine.ManagementService;
 
 /**
  * ManagementServiceExtImpl
@@ -26,11 +28,16 @@ import com.photowe.ext.core.api.management.ManagementServiceExt;
  * @date 2021/01/01
  * @since 1.0.0
  */
-public class ManagementServiceExtImpl implements ManagementServiceExt {
+public class ManagementServiceExtImpl extends AbstractManagementServiceDelegate implements ManagementServiceExt {
 
     private final ProcessEngineExt processEngineExt;
 
     public ManagementServiceExtImpl(ProcessEngineExt processEngineExt) {
         this.processEngineExt = processEngineExt;
+    }
+
+    @Override
+    public ManagementService getManagementService() {
+        return this.processEngineExt.getProcessEngineConfiguration().getManagementService();
     }
 }

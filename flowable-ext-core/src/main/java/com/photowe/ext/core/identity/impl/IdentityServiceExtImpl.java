@@ -18,6 +18,8 @@ package com.photowe.ext.core.identity.impl;
 
 import com.photowe.ext.core.api.engine.ProcessEngineExt;
 import com.photowe.ext.core.api.identity.IdentityServiceExt;
+import com.photowe.ext.core.identity.AbstractIdentityServiceDelegate;
+import org.flowable.engine.IdentityService;
 
 /**
  * IdentityServiceExtImpl
@@ -26,7 +28,7 @@ import com.photowe.ext.core.api.identity.IdentityServiceExt;
  * @date 2021/01/01
  * @since 1.0.0
  */
-public class IdentityServiceExtImpl implements IdentityServiceExt {
+public class IdentityServiceExtImpl extends AbstractIdentityServiceDelegate implements IdentityServiceExt {
 
     private final ProcessEngineExt processEngineExt;
 
@@ -34,4 +36,8 @@ public class IdentityServiceExtImpl implements IdentityServiceExt {
         this.processEngineExt = processEngineExt;
     }
 
+    @Override
+    public IdentityService getIdentityService() {
+        return this.processEngineExt.getProcessEngineConfiguration().getIdentityService();
+    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020 photowey (photowey@gmail.com)
+ * Copyright © 2020-2021 photowey (photowey@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.photowey.flowable.ext.mybatis.api.query;
+package com.photowey.flowable.ext.mybatis.api.impl.query.impl;
 
-import com.photowey.flowable.ext.mybatis.model.NativeQueryAdaptor;
+import com.photowey.flowable.ext.mybatis.api.query.AbstractNativeQueryExt;
 import com.photowey.flowable.ext.mybatis.api.service.NativeQueryService;
+import com.photowey.flowable.ext.mybatis.model.NativeQueryAdaptor;
 
 import java.util.List;
 import java.util.Map;

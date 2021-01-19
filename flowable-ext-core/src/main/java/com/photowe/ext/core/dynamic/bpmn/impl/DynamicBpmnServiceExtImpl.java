@@ -17,20 +17,27 @@
 package com.photowe.ext.core.dynamic.bpmn.impl;
 
 import com.photowe.ext.core.api.dynamic.DynamicBpmnServiceExt;
+import com.photowe.ext.core.api.engine.ProcessEngineExt;
+import com.photowe.ext.core.dynamic.bpmn.AbstractDynamicBpmnServiceDelegate;
 import org.flowable.engine.DynamicBpmnService;
 
 /**
- * DynamicBpmnServiceExtImpl
+ * {@code DynamicBpmnServiceExtImpl}
  *
  * @author photowey
  * @date 2021/01/01
  * @since 1.0.0
  */
-public class DynamicBpmnServiceExtImpl implements DynamicBpmnServiceExt {
+public class DynamicBpmnServiceExtImpl extends AbstractDynamicBpmnServiceDelegate implements DynamicBpmnServiceExt {
 
-    private final DynamicBpmnService dynamicBpmnService;
+    private final ProcessEngineExt processEngineExt;
 
-    public DynamicBpmnServiceExtImpl(DynamicBpmnService dynamicBpmnService) {
-        this.dynamicBpmnService = dynamicBpmnService;
+    public DynamicBpmnServiceExtImpl(ProcessEngineExt processEngineExt) {
+        this.processEngineExt = processEngineExt;
+    }
+
+    @Override
+    public DynamicBpmnService getDynamicBpmnService() {
+        return this.processEngineExt.getProcessEngine().getDynamicBpmnService();
     }
 }

@@ -18,6 +18,8 @@ package com.photowe.ext.core.runtime.impl;
 
 import com.photowe.ext.core.api.engine.ProcessEngineExt;
 import com.photowe.ext.core.api.runtime.RuntimeServiceExt;
+import com.photowe.ext.core.runtime.AbstractRuntimeServiceDelegate;
+import org.flowable.engine.RuntimeService;
 
 /**
  * RuntimeServiceExtImpl
@@ -26,11 +28,16 @@ import com.photowe.ext.core.api.runtime.RuntimeServiceExt;
  * @date 2021/01/01
  * @since 1.0.0
  */
-public class RuntimeServiceExtImpl implements RuntimeServiceExt {
+public class RuntimeServiceExtImpl extends AbstractRuntimeServiceDelegate implements RuntimeServiceExt {
 
     private final ProcessEngineExt processEngineExt;
 
     public RuntimeServiceExtImpl(ProcessEngineExt processEngineExt) {
         this.processEngineExt = processEngineExt;
+    }
+
+    @Override
+    public RuntimeService getRuntimeService() {
+        return this.processEngineExt.getProcessEngineConfiguration().getRuntimeService();
     }
 }

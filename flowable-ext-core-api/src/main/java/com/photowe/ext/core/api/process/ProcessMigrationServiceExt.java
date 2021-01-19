@@ -16,6 +16,8 @@
 
 package com.photowe.ext.core.api.process;
 
+import org.flowable.engine.ProcessMigrationService;
+
 /**
  * {@code ProcessMigrationServiceExt} is an interface that extends {@link org.flowable.engine.ProcessMigrationService}
  *
@@ -23,5 +25,5 @@ package com.photowe.ext.core.api.process;
  * @date 2020/12/28
  * @since 1.0.0
  */
-public interface ProcessMigrationServiceExt {
+public interface ProcessMigrationServiceExt extends ProcessMigrationService {
 }

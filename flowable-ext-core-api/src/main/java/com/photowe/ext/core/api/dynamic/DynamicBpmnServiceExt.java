@@ -16,6 +16,8 @@
 
 package com.photowe.ext.core.api.dynamic;
 
+import org.flowable.engine.DynamicBpmnService;
+
 /**
  * {@code DynamicBpmnServiceExt} is an interface that extends {@link org.flowable.engine.DynamicBpmnService}
  *
@@ -23,5 +25,6 @@ package com.photowe.ext.core.api.dynamic;
  * @date 2020/12/28
  * @since 1.0.0
  */
-public interface DynamicBpmnServiceExt {
+public interface DynamicBpmnServiceExt extends DynamicBpmnService {
+
 }

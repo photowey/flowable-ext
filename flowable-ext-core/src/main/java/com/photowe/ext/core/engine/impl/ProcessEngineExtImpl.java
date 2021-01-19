@@ -49,6 +49,11 @@ public class ProcessEngineExtImpl implements ProcessEngineExt {
     }
 
     @Override
+    public ProcessEngine getProcessEngine() {
+        return this.processEngine;
+    }
+
+    @Override
     public void startExecutors() {
 
     }

@@ -16,9 +16,9 @@
 
 package com.photowey.flowable.ext.mybatis.api.impl.service.impl;
 
+import com.photowey.flowable.ext.mybatis.api.impl.query.impl.NativeQueryExtImpl;
 import com.photowey.flowable.ext.mybatis.api.mapper.NativeQueryMapper;
 import com.photowey.flowable.ext.mybatis.api.query.NativeQueryExt;
-import com.photowey.flowable.ext.mybatis.api.query.NativeQueryExtImpl;
 import com.photowey.flowable.ext.mybatis.api.service.NativeQueryService;
 import com.photowey.flowable.ext.mybatis.model.NativeQueryAdaptor;
 

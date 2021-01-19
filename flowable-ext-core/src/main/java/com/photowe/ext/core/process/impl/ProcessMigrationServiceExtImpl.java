@@ -18,6 +18,8 @@ package com.photowe.ext.core.process.impl;
 
 import com.photowe.ext.core.api.engine.ProcessEngineExt;
 import com.photowe.ext.core.api.process.ProcessMigrationServiceExt;
+import com.photowe.ext.core.process.AbstractProcessMigrationServiceDelegate;
+import org.flowable.engine.ProcessMigrationService;
 
 /**
  * ProcessMigrationServiceExtImpl
@@ -26,11 +28,16 @@ import com.photowe.ext.core.api.process.ProcessMigrationServiceExt;
  * @date 2021/01/01
  * @since 1.0.0
  */
-public class ProcessMigrationServiceExtImpl implements ProcessMigrationServiceExt {
+public class ProcessMigrationServiceExtImpl extends AbstractProcessMigrationServiceDelegate implements ProcessMigrationServiceExt {
 
     private final ProcessEngineExt processEngineExt;
 
     public ProcessMigrationServiceExtImpl(ProcessEngineExt processEngineExt) {
         this.processEngineExt = processEngineExt;
+    }
+
+    @Override
+    public ProcessMigrationService getProcessMigrationService() {
+        return this.processEngineExt.getProcessEngine().getProcessMigrationService();
     }
 }

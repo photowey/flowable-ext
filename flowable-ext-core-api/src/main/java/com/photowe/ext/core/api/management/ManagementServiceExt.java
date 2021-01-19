@@ -16,6 +16,8 @@
 
 package com.photowe.ext.core.api.management;
 
+import org.flowable.engine.ManagementService;
+
 /**
  * {@code ManagementServiceExt} is an interface that extends {@link org.flowable.engine.ManagementService}
  *
@@ -23,5 +25,5 @@ package com.photowe.ext.core.api.management;
  * @date 2020/12/28
  * @since 1.0.0
  */
-public interface ManagementServiceExt {
+public interface ManagementServiceExt extends ManagementService {
 }

@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.photowe.ext.core.api.message.context;
+package com.photowe.ext.core.message.context;
+
+import com.photowe.ext.core.api.message.context.MessageContext;
 
 import java.util.HashMap;
 import java.util.Map;

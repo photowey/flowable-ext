@@ -18,19 +18,26 @@ package com.photowe.ext.core.task.impl;
 
 import com.photowe.ext.core.api.engine.ProcessEngineExt;
 import com.photowe.ext.core.api.task.TaskServiceExt;
+import com.photowe.ext.core.task.AbstractTaskServiceDelegate;
+import org.flowable.engine.TaskService;
 
 /**
- * TaskServiceExtImpl
+ * {code TaskServiceExtImpl}
  *
  * @author photowey
  * @date 2021/01/01
  * @since 1.0.0
  */
-public class TaskServiceExtImpl implements TaskServiceExt {
+public class TaskServiceExtImpl extends AbstractTaskServiceDelegate implements TaskServiceExt {
 
     private final ProcessEngineExt processEngineExt;
 
     public TaskServiceExtImpl(ProcessEngineExt processEngineExt) {
         this.processEngineExt = processEngineExt;
+    }
+
+    @Override
+    public TaskService getTaskService() {
+        return this.processEngineExt.getProcessEngineConfiguration().getTaskService();
     }
 }

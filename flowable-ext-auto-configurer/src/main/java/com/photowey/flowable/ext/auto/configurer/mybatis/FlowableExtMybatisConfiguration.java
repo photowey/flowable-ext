@@ -28,6 +28,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FlowableExtMybatisConfiguration {
 
+    // @MapperScan("com.photowey.flowable.ext.mybatis.api.mapper")
     // TODO
 
 }

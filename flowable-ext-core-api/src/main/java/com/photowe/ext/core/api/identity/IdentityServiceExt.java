@@ -16,6 +16,8 @@
 
 package com.photowe.ext.core.api.identity;
 
+import org.flowable.engine.IdentityService;
+
 /**
  * {@code IdentityServiceExt} is an interface that extends {@link org.flowable.engine.IdentityService}
  *
@@ -23,5 +25,5 @@ package com.photowe.ext.core.api.identity;
  * @date 2020/12/28
  * @since 1.0.0
  */
-public interface IdentityServiceExt {
+public interface IdentityServiceExt extends IdentityService {
 }

@@ -20,13 +20,13 @@ import com.photowe.ext.core.api.engine.ProcessEngineExt;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * {@code ProcessEngineInjector} is an {@link ProcessEngineExt} injector
+ * {@code ProcessEngineExtInjector} is an {@link ProcessEngineExt} injector
  *
  * @author photowey
  * @date 2021/01/05
  * @since 1.0.0
  */
-public interface ProcessEngineInjector extends InitializingBean {
+public interface ProcessEngineExtInjector extends InitializingBean {
 
     void handlePostInject(ProcessEngineExt processEngineExt);
 

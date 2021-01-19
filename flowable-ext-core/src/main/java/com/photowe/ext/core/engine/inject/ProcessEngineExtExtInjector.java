@@ -18,7 +18,6 @@ package com.photowe.ext.core.engine.inject;
 
 import com.photowe.ext.core.api.aware.ProcessEngineExtAware;
 import com.photowe.ext.core.api.engine.ProcessEngineExt;
-import com.photowe.ext.core.api.engine.inject.ProcessEngineInjector;
 import com.photowey.flowable.ext.common.util.CollectionUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -36,13 +35,13 @@ import java.util.Map;
  * @date 2021/01/05
  * @since 1.0.0
  */
-public class ProcessEngineExtInjector implements ProcessEngineInjector, BeanFactoryAware {
+public class ProcessEngineExtExtInjector implements com.photowe.ext.core.api.engine.inject.ProcessEngineExtInjector, BeanFactoryAware {
 
     private final ProcessEngineExt processEngineExt;
 
     private ConfigurableListableBeanFactory beanFactory;
 
-    public ProcessEngineExtInjector(ProcessEngineExt processEngineExt) {
+    public ProcessEngineExtExtInjector(ProcessEngineExt processEngineExt) {
         this.processEngineExt = processEngineExt;
     }
 

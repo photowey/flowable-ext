@@ -40,6 +40,13 @@ import org.flowable.engine.ProcessEngineConfiguration;
 public interface ProcessEngineExt {
 
     /**
+     * {@link ProcessEngine}
+     *
+     * @return {@link ProcessEngine}
+     */
+    ProcessEngine getProcessEngine();
+
+    /**
      * The flowable-ext version
      */
     String FLOWABLE_EXT_VERSION = "1.0.0";
