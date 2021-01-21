@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020 photowey (photowey@gmail.com)
+ * Copyright © 2020-2021 photowey (photowey@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,27 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "flowable.ext", ignoreUnknownFields = true, ignoreInvalidFields = false)
 public class FlowableExtProperties {
 
-    // TODO
+    private static final String MAPPER_BASE_PACKAGE = "com.photowey.flowable.ext.mybatis.api.mapper";
 
+    private Mapper mapper = new Mapper();
+
+    public static class Mapper {
+        private String basePackage = MAPPER_BASE_PACKAGE;
+
+        public String getBasePackage() {
+            return basePackage;
+        }
+
+        public void setBasePackage(String basePackage) {
+            this.basePackage = basePackage;
+        }
+    }
+
+    public Mapper getMapper() {
+        return mapper;
+    }
+
+    public void setMapper(Mapper mapper) {
+        this.mapper = mapper;
+    }
 }

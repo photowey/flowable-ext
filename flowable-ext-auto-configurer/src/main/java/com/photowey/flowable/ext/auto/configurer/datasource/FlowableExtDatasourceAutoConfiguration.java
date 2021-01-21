@@ -36,7 +36,7 @@ import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
 
-import static com.photowey.flowable.ext.auto.configurer.datasource.FlowableExtDatasourceAutoConfiguration.FLOWABLE_EXT_DATASOURCE_URL_PREFIX;
+import static com.photowey.flowable.ext.auto.configurer.constant.AutoConfigurerConstants.*;
 
 /**
  * {@code FlowableExtDatasourceAutoConfiguration}
@@ -52,16 +52,6 @@ import static com.photowey.flowable.ext.auto.configurer.datasource.FlowableExtDa
         matchIfMissing = false
 )
 public class FlowableExtDatasourceAutoConfiguration {
-
-    public static final String FLOWABLE_EXT_DATASOURCE_URL_PREFIX = "spring.datasource.flowable.ext.url";
-    private static final String FLOWABLE_EXT_DATASOURCE_TYPE_PREFIX = "spring.datasource.flowable.ext.type";
-    private static final String FLOWABLE_EXT_DATASOURCE_DRUID_SOURCE = "spring.datasource.flowable.ext.druid";
-    private static final String FLOWABLE_EXT_DATASOURCE_HIKARI_SOURCE = "spring.datasource.flowable.ext.hikari";
-    private static final String FLOWABLE_EXT_DATASOURCE_NAME = "flowable-ext-datasource";
-    private static final String FLOWABLE_EXT_PLATFORM_TRANSACTION_MANAGER_NAME = "flowable-ext-datasource";
-
-    private static final String DRUID_DATA_SOURCE = "com.alibaba.druid.pool.DruidDataSource";
-    private static final String HIKARICP_DATA_SOURCE = "com.zaxxer.hikari.HikariDataSource";
 
     /**
      * Create {@link PlatformTransactionManager} instance.

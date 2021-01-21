@@ -54,7 +54,7 @@ import org.springframework.context.annotation.Import;
 @ConditionalOnClass(value = {ProcessEngine.class, ProcessEngineExt.class})
 @AutoConfigureBefore(value = {ProcessEngineServicesAutoConfiguration.class})
 @AutoConfigureAfter(value = {FlowableExtDatasourceAutoConfiguration.class})
-public class ProcessEngineExtServiceAutoConfiguration {
+public class ProcessEngineExtServicesAutoConfiguration {
 
     /**
      * Create {@link ProcessEngineExt} instance if necessary.
