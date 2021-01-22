@@ -68,9 +68,4 @@ public class NativeQueryExtImpl extends AbstractNativeQueryExt<NativeQueryExtImp
         NativeQueryAdaptor query = queryBuilder.build();
         return this.nativeQueryService.listPage(query, converter);
     }
-
-    public static void main(String[] args) {
-
-    }
-
 }
