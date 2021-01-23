@@ -1,0 +1,17 @@
+server:
+  port: 4399
+
+spring:
+  application:
+    name: "flowable-ext-test"
+  profiles:
+    active: dev
+  datasource:
+    flowable:
+      ext:
+        type: "com.alibaba.druid.pool.DruidDataSource"
+        druid:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://${local.mysql.host}:${local.mysql.port}/flowable?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
+          username: ${local.mysql.username}
+          password: ${local.mysql.password}

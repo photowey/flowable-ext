@@ -15,3 +15,7 @@
  */
 
 description = "flowable-ext-starter"
+
+dependencies {
+    compile project(":flowable-ext-auto-configurer")
+}

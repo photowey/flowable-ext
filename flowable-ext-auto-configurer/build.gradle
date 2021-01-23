@@ -17,8 +17,6 @@
 description = "flowable-ext-auto-configurer"
 
 dependencies {
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-common")
     compile project(":flowable-ext-core")
     compile project(":flowable-ext-mybatis-api")
 

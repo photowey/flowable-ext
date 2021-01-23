@@ -16,6 +16,7 @@
 
 package com.photowey.flowable.ext.auto.configurer.engine;
 
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import com.photowey.ext.core.api.engine.ProcessEngineExt;
 import com.photowey.ext.core.api.engine.inject.ProcessEngineExtInjector;
 import com.photowey.ext.core.dynamic.bpmn.impl.DynamicBpmnServiceExtImpl;
@@ -52,7 +53,7 @@ import org.springframework.context.annotation.Import;
 @Import(value = {FlowableExtMybatisConfiguration.class})
 @EnableConfigurationProperties(FlowableExtProperties.class)
 @ConditionalOnClass(value = {ProcessEngine.class, ProcessEngineExt.class})
-@AutoConfigureBefore(value = {ProcessEngineServicesAutoConfiguration.class})
+@AutoConfigureBefore(value = {ProcessEngineServicesAutoConfiguration.class, DruidDataSourceAutoConfigure.class})
 @AutoConfigureAfter(value = {FlowableExtDatasourceAutoConfiguration.class})
 public class ProcessEngineExtServicesAutoConfiguration {
 

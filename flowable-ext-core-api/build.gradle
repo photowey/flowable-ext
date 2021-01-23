@@ -2,7 +2,6 @@ description = "flowable-ext-core-api"
 
 dependencies {
     // Parent
-    compile project(":flowable-ext-parent")
     compile project(":flowable-ext-common")
     compile project(":flowable-ext-mybatis-api-impl")
     compile "org.flowable:flowable-spring-boot-starter:${FLOWABLE_VERSION}"

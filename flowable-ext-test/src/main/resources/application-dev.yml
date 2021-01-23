@@ -1,0 +1,14 @@
+local:
+  mysql:
+    host: 192.168.0.11
+    port: 3307
+    username: root
+    password: root
+
+mybatis-plus:
+  configuration-properties.boolValue: TRUE
+  configuration-properties.blobType: BLOB
+
+logging:
+  level:
+    root: info

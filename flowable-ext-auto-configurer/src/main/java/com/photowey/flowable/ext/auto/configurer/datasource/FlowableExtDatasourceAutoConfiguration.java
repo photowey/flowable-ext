@@ -19,20 +19,17 @@ package com.photowey.flowable.ext.auto.configurer.datasource;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.util.StringUtils;
+import org.springframework.context.annotation.Import;
 
 import javax.sql.DataSource;
 
@@ -46,35 +43,33 @@ import static com.photowey.flowable.ext.auto.configurer.constant.AutoConfigurerC
  * @since 1.0.0
  */
 @Configuration
-@AutoConfigureBefore(DataSourceAutoConfiguration.class)
 @ConditionalOnProperty(
-        value = {FLOWABLE_EXT_DATASOURCE_URL_PREFIX},
+        value = {FLOWABLE_EXT_DATASOURCE_CANDIDATE_TYPE_PREFIX},
         matchIfMissing = false
 )
-public class FlowableExtDatasourceAutoConfiguration {
+@Import(value = {
+        FlowableExtDatasourceAutoConfiguration.HikariDatasourceAutoConfiguration.class,
+        FlowableExtDatasourceAutoConfiguration.DruidDatasourceAutoConfiguration.class,
+})
+public class FlowableExtDatasourceAutoConfiguration implements InitializingBean {
 
-    /**
-     * Create {@link PlatformTransactionManager} instance.
-     *
-     * @param flowableExtDatasource
-     * @return {@link PlatformTransactionManager}
-     */
-    @Bean(FLOWABLE_EXT_PLATFORM_TRANSACTION_MANAGER_NAME)
-    public PlatformTransactionManager flowableExtPlatformTransactionManager(
-            @Qualifier(FLOWABLE_EXT_PLATFORM_TRANSACTION_MANAGER_NAME) DataSource flowableExtDatasource) {
-        return new DataSourceTransactionManager(flowableExtDatasource);
+    private static final Logger log = LoggerFactory.getLogger(FlowableExtDatasourceAutoConfiguration.class);
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        log.info("activated the flowable-ext auto-configuration");
     }
 
     /**
      * Create {@link HikariDataSource} instance by default.
      */
-    @Configuration(proxyBeanMethods = false)
+    @Configuration
     @ConditionalOnClass({HikariDataSource.class})
     @ConditionalOnMissingBean({DataSource.class})
     @ConditionalOnProperty(
             value = {FLOWABLE_EXT_DATASOURCE_TYPE_PREFIX},
             havingValue = HIKARICP_DATA_SOURCE,
-            matchIfMissing = true
+            matchIfMissing = false
     )
     static class HikariDatasourceAutoConfiguration {
 
@@ -85,11 +80,10 @@ public class FlowableExtDatasourceAutoConfiguration {
          */
         @Bean(FLOWABLE_EXT_DATASOURCE_NAME)
         @ConfigurationProperties(FLOWABLE_EXT_DATASOURCE_HIKARI_SOURCE)
-        public HikariDataSource dataSource(DataSourceProperties properties) {
+        public DataSource hikariDataSource() {
+            log.info("the flowable-ext activated the default hikari-dataSource");
             HikariDataSource dataSource = (HikariDataSource) DataSourceBuilder.create().build();
-            if (StringUtils.hasText(properties.getName())) {
-                dataSource.setPoolName(properties.getName());
-            }
+            dataSource.setPoolName("hikari-data-source");
 
             return dataSource;
         }
@@ -103,7 +97,7 @@ public class FlowableExtDatasourceAutoConfiguration {
     @ConditionalOnProperty(
             value = {FLOWABLE_EXT_DATASOURCE_TYPE_PREFIX},
             havingValue = DRUID_DATA_SOURCE,
-            matchIfMissing = true
+            matchIfMissing = false
     )
     static class DruidDatasourceAutoConfiguration {
 
@@ -114,7 +108,8 @@ public class FlowableExtDatasourceAutoConfiguration {
          */
         @Bean(FLOWABLE_EXT_DATASOURCE_NAME)
         @ConfigurationProperties(FLOWABLE_EXT_DATASOURCE_DRUID_SOURCE)
-        public DataSource flowableExtDatasource() {
+        public DataSource druidDataSource() {
+            log.info("the flowable-ext activated the user-config druid-dataSource");
             return DruidDataSourceBuilder.create().build();
         }
     }

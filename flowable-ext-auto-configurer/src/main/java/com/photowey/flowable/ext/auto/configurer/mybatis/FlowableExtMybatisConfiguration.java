@@ -34,11 +34,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.ListableBeanFactory;
-import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -66,12 +62,7 @@ import static com.photowey.flowable.ext.auto.configurer.constant.AutoConfigurerC
  */
 @Configuration
 @ConditionalOnClass(MybatisCandidate.class)
-public class FlowableExtMybatisConfiguration implements ResourceLoaderAware, BeanFactoryAware {
-
-    @Autowired
-    private MybatisPlusProperties mybatisPlusProperties;
-    @Autowired
-    private FlowableExtProperties flowableExtProperties;
+public class FlowableExtMybatisConfiguration implements ResourceLoaderAware, BeanFactoryAware, InitializingBean {
 
     private ResourceLoader resourceLoader;
     private ListableBeanFactory beanFactory;
@@ -84,6 +75,14 @@ public class FlowableExtMybatisConfiguration implements ResourceLoaderAware, Bea
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         this.beanFactory = (ListableBeanFactory) beanFactory;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        FlowableExtProperties flowableExtProperties = this.beanFactory.getBean(FlowableExtProperties.class);
+        if (ObjectUtils.isEmpty(flowableExtProperties.getMapper().getBasePackage())) {
+            throw new NullPointerException("the flowable-ext config-key:[flowable.ext.mapper.base-package] can't be blank.");
+        }
     }
 
     /**
@@ -160,15 +159,18 @@ public class FlowableExtMybatisConfiguration implements ResourceLoaderAware, Bea
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
+        FlowableExtProperties flowableExtProperties = this.beanFactory.getBean(FlowableExtProperties.class);
         // com.xxx.mapper,com.yyy.mapper
-        mapperScannerConfigurer.setBasePackage(this.flowableExtProperties.getMapper().getBasePackage());
+        mapperScannerConfigurer.setBasePackage(flowableExtProperties.getMapper().getBasePackage());
         mapperScannerConfigurer.setSqlSessionFactoryBeanName(FLOWABLE_EXT_SQL_SESSION_FACTORY_ID);
         mapperScannerConfigurer.setSqlSessionTemplateBeanName(FLOWABLE_EXT_SQL_SESSION_TEMPLATE_ID_ID);
         return mapperScannerConfigurer;
     }
 
     private void populateCandidateBeanType() {
-        GlobalConfig globalConfig = this.mybatisPlusProperties.getGlobalConfig();
+        MybatisPlusProperties mybatisPlusProperties = this.beanFactory.getBean(MybatisPlusProperties.class);
+        GlobalConfig globalConfig = mybatisPlusProperties.getGlobalConfig();
+        globalConfig.setBanner(false);
         this.getBeanThen(MetaObjectHandler.class, globalConfig::setMetaObjectHandler);
         this.getBeanThen(IKeyGenerator.class, i -> globalConfig.getDbConfig().setKeyGenerator(i));
         this.getBeanThen(ISqlInjector.class, globalConfig::setSqlInjector);
@@ -184,19 +186,21 @@ public class FlowableExtMybatisConfiguration implements ResourceLoaderAware, Bea
     // -------------------------------------------------------------------------------------------------------------------------- POPULATE
 
     private void populateGlobalConfig(MybatisSqlSessionFactoryBean factoryBean) {
-        GlobalConfig globalConfig = this.mybatisPlusProperties.getGlobalConfig();
+        MybatisPlusProperties mybatisPlusProperties = this.beanFactory.getBean(MybatisPlusProperties.class);
+        GlobalConfig globalConfig = mybatisPlusProperties.getGlobalConfig();
         factoryBean.setGlobalConfig(globalConfig);
     }
 
     private void populateConfiguration(MybatisSqlSessionFactoryBean factoryBean) {
-        MybatisConfiguration configuration = this.mybatisPlusProperties.getConfiguration();
+        MybatisPlusProperties mybatisPlusProperties = this.beanFactory.getBean(MybatisPlusProperties.class);
+        MybatisConfiguration configuration = mybatisPlusProperties.getConfiguration();
         if (mybatisPlusProperties.getConfigurationProperties() != null) {
             factoryBean.setConfigurationProperties(mybatisPlusProperties.getConfigurationProperties());
         }
         if (StringUtils.hasText(mybatisPlusProperties.getConfigLocation())) {
             factoryBean.setConfigLocation(this.resourceLoader.getResource(mybatisPlusProperties.getConfigLocation()));
         }
-        if (configuration == null && !StringUtils.hasText(this.mybatisPlusProperties.getConfigLocation())) {
+        if (configuration == null && !StringUtils.hasText(mybatisPlusProperties.getConfigLocation())) {
             configuration = new MybatisConfiguration();
         }
         this.applyConfiguration(factoryBean, configuration);
@@ -207,6 +211,7 @@ public class FlowableExtMybatisConfiguration implements ResourceLoaderAware, Bea
     }
 
     private void populateMapperLocations(MybatisSqlSessionFactoryBean factoryBean) {
+        MybatisPlusProperties mybatisPlusProperties = this.beanFactory.getBean(MybatisPlusProperties.class);
         Resource[] mapperLocations = mybatisPlusProperties.resolveMapperLocations();
         if (!ObjectUtils.isEmpty(mapperLocations)) {
             factoryBean.setMapperLocations(mapperLocations);

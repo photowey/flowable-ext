@@ -25,8 +25,8 @@ package com.photowey.flowable.ext.auto.configurer.constant;
  */
 public interface AutoConfigurerConstants {
 
-    String FLOWABLE_EXT_DATASOURCE_URL_PREFIX = "spring.datasource.flowable.ext.url";
-    String FLOWABLE_EXT_PLATFORM_TRANSACTION_MANAGER_NAME = "flowable-ext-datasource";
+    String FLOWABLE_EXT_DATASOURCE_CANDIDATE_TYPE_PREFIX = "spring.datasource.flowable.ext.type";
+    String FLOWABLE_EXT_PLATFORM_TRANSACTION_MANAGER_NAME = "flowable-ext-platform-transaction-manager";
 
     String FLOWABLE_EXT_DATASOURCE_TYPE_PREFIX = "spring.datasource.flowable.ext.type";
     String FLOWABLE_EXT_DATASOURCE_DRUID_SOURCE = "spring.datasource.flowable.ext.druid";

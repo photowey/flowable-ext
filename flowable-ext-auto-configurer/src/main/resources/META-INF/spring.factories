@@ -1,3 +1,5 @@
 # EnableAutoConfiguration
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.photowey.flowable.ext.auto.configurer.datasource.FlowableExtDatasourceAutoConfiguration, \
+com.photowey.flowable.ext.auto.configurer.datasource.FlowableExtTransactionManagerAutoConfiguration, \
 com.photowey.flowable.ext.auto.configurer.engine.ProcessEngineExtServicesAutoConfiguration
