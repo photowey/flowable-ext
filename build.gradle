@@ -39,7 +39,6 @@ plugins {
     id 'java'
 }
 
-
 // ================================================================= SUB_PROJECT
 
 subprojects {
@@ -73,10 +72,19 @@ version = '1.0.0-SNAPSHOT'
 description = "flowable-ext"
 defaultTasks 'build'
 
+// ================================================================= PACKAGE_SOURCES
+
+task packageSources(type: Jar, dependsOn: classes) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+}
+
 // ================================================================= ALL_PROJECTS
 
 allprojects {
-    // Apply declare versions
+    // Publish
+    apply plugin: 'maven-publish'
+    // Apply declare versions.
     apply from: "${project.rootDir}/versions.gradle"
 
     group 'com.photowey'
@@ -87,8 +95,30 @@ allprojects {
     }
 
     jar {
-        // for multi module
+        // For multi module.
         enabled(true)
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+
+        repositories {
+            mavenLocal()
+        }
+    }
+
+    artifacts {
+        archives packageSources
+    }
+
+    uploadArchives {
+        repositories {
+            mavenLocal()
+        }
     }
 
     repositories {
