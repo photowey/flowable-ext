@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020 photowey (photowey@gmail.com)
+ * Copyright © 2020-2021 photowey (photowey@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,12 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-mybatis-api"
-
-dependencies {
-    // Parent
-    compile project(":flowable-ext-parent")
-    compile project(":flowable-ext-mybatis-model")
-    compile project(":flowable-ext-entity")
-
-    compile "com.baomidou:mybatis-plus-boot-starter:${MYBATIS_PLUS_VERSION}"
-    compile "com.alibaba:druid-spring-boot-starter:${DRUID_STARTER_VERSION}"
-
-    // compile "org.mybatis:mybatis:${MYBATIS_VERSION}"
-    // compile "org.mybatis:mybatis-spring:${MYBATIS_SPRING_VERSION}"
-}
+/**
+ * {@code com.photowey.flowable.ext.dto.payload.biz}
+ * Request handle the process related action.
+ *
+ * @author photowey
+ * @date 2021/01/29
+ * @since 1.0.0
+ */
+package com.photowey.flowable.ext.dto.payload.process;

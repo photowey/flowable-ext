@@ -16,7 +16,7 @@
 
 /**
  * {@code com.photowey.flowable.ext.dto.model}
- * The respone model
+ * The response model
  *
  * @author photowey
  * @date 2021/01/23

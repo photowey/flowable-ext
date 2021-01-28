@@ -14,8 +14,33 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-dto"
+package com.photowey.flowable.ext.dto.payload;
 
-dependencies {
-    compile "javax.validation:validation-api:${VALIDATION_API_VERSION}"
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+
+/**
+ * {@code Payload}
+ *
+ * @author photowey
+ * @date 2021/01/29
+ * @since 1.0.0
+ */
+public abstract class AbstractPayload implements Serializable {
+
+    private static final long serialVersionUID = -2363594440088400897L;
+
+    /**
+     * The primary key.
+     */
+    @NotNull
+    public Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
