@@ -16,6 +16,7 @@
 
 package com.photowey.flowable.ext.dto.query.biz;
 
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 /**
@@ -62,10 +63,12 @@ public class LocalBizQuery implements Serializable {
     /**
      * The create-time as timestamp(start).
      */
+    @Min(value = 0)
     private Long createTimeStart;
     /**
      * The create-time as timestamp(end).
      */
+    @Min(value = 0)
     private Long createTimeEnd;
 
     public Long getId() {
