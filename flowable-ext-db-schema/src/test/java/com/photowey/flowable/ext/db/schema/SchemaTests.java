@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020 photowey (photowey@gmail.com)
+ * Copyright © 2020-2021 photowey (photowey@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,23 @@
  * limitations under the License.
  */
 
-description = "flowable-ext-core-api"
+package com.photowey.flowable.ext.db.schema;
 
-dependencies {
-    compile project(":flowable-ext-common")
-    compile project(":flowable-ext-mybatis-api-impl")
-    compile "org.flowable:flowable-spring-boot-starter:${FLOWABLE_VERSION}"
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+/**
+ * {@code SchemaTests}
+ *
+ * @author photowey
+ * @date 2021/01/31
+ * @since 1.0.0
+ */
+public class SchemaTests {
+
+    @Test
+    public void testCompile() {
+        Assertions.assertTrue(1 == 1, ":flowable-ext-db-schema project compile error.");
+    }
+
 }

@@ -17,6 +17,5 @@
 description = "flowable-ext-core"
 
 dependencies {
-    // Parent
     compile project(":flowable-ext-core-api")
 }
